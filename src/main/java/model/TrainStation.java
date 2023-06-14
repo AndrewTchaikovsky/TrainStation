@@ -1,9 +1,14 @@
 package model;
 
+import java.util.List;
+
 public class TrainStation {
     private int id;
     private String name;
     private String location;
+    private List<Employee> employees;
+    private List<Platform> platforms;
+    private List<TrainSchedule> trainSchedules;
 
     public TrainStation(int id, String name, String location) {
         this.id = id;
