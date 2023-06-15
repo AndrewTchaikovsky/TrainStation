@@ -7,7 +7,8 @@ public class Platform {
     private int number;
     private int stationId;
     private int typeId;
-    private List<PlatformType> platformTypes;
+    PlatformType platformTypes;
+    TrainStation trainStation;
 
     public Platform(int id, int number, int stationId, int typeId) {
         this.id = id;
@@ -51,6 +52,22 @@ public class Platform {
         this.typeId = typeId;
     }
 
+    public PlatformType getPlatformTypes() {
+        return platformTypes;
+    }
+
+    public void setPlatformTypes(PlatformType platformTypes) {
+        this.platformTypes = platformTypes;
+    }
+
+    public TrainStation getTrainStation() {
+        return trainStation;
+    }
+
+    public void setTrainStation(TrainStation trainStation) {
+        this.trainStation = trainStation;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -61,7 +78,10 @@ public class Platform {
         if (getId() != platform.getId()) return false;
         if (getNumber() != platform.getNumber()) return false;
         if (getStationId() != platform.getStationId()) return false;
-        return getTypeId() == platform.getTypeId();
+        if (getTypeId() != platform.getTypeId()) return false;
+        if (getPlatformTypes() != null ? !getPlatformTypes().equals(platform.getPlatformTypes()) : platform.getPlatformTypes() != null)
+            return false;
+        return getTrainStation() != null ? getTrainStation().equals(platform.getTrainStation()) : platform.getTrainStation() == null;
     }
 
     @Override
@@ -70,16 +90,20 @@ public class Platform {
         result = 31 * result + getNumber();
         result = 31 * result + getStationId();
         result = 31 * result + getTypeId();
+        result = 31 * result + (getPlatformTypes() != null ? getPlatformTypes().hashCode() : 0);
+        result = 31 * result + (getTrainStation() != null ? getTrainStation().hashCode() : 0);
         return result;
     }
 
     @Override
     public String toString() {
-        return "Platforms{" +
+        return "Platform{" +
                 "id=" + id +
                 ", number=" + number +
                 ", stationId=" + stationId +
                 ", typeId=" + typeId +
+                ", platformTypes=" + platformTypes +
+                ", trainStation=" + trainStation +
                 '}';
     }
 }

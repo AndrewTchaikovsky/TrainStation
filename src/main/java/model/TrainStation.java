@@ -15,6 +15,7 @@ public class TrainStation {
         this.name = name;
         this.location = location;
     }
+
     public TrainStation() {
     }
 
@@ -42,6 +43,30 @@ public class TrainStation {
         this.location = location;
     }
 
+    public List<Employee> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(List<Employee> employees) {
+        this.employees = employees;
+    }
+
+    public List<Platform> getPlatforms() {
+        return platforms;
+    }
+
+    public void setPlatforms(List<Platform> platforms) {
+        this.platforms = platforms;
+    }
+
+    public List<TrainSchedule> getTrainSchedules() {
+        return trainSchedules;
+    }
+
+    public void setTrainSchedules(List<TrainSchedule> trainSchedules) {
+        this.trainSchedules = trainSchedules;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -51,7 +76,12 @@ public class TrainStation {
 
         if (getId() != that.getId()) return false;
         if (!getName().equals(that.getName())) return false;
-        return getLocation().equals(that.getLocation());
+        if (!getLocation().equals(that.getLocation())) return false;
+        if (getEmployees() != null ? !getEmployees().equals(that.getEmployees()) : that.getEmployees() != null)
+            return false;
+        if (getPlatforms() != null ? !getPlatforms().equals(that.getPlatforms()) : that.getPlatforms() != null)
+            return false;
+        return getTrainSchedules() != null ? getTrainSchedules().equals(that.getTrainSchedules()) : that.getTrainSchedules() == null;
     }
 
     @Override
@@ -59,15 +89,21 @@ public class TrainStation {
         int result = getId();
         result = 31 * result + getName().hashCode();
         result = 31 * result + getLocation().hashCode();
+        result = 31 * result + (getEmployees() != null ? getEmployees().hashCode() : 0);
+        result = 31 * result + (getPlatforms() != null ? getPlatforms().hashCode() : 0);
+        result = 31 * result + (getTrainSchedules() != null ? getTrainSchedules().hashCode() : 0);
         return result;
     }
 
     @Override
     public String toString() {
-        return "model.TrainStation{" +
+        return "TrainStation{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", location='" + location + '\'' +
+                ", employees=" + employees +
+                ", platforms=" + platforms +
+                ", trainSchedules=" + trainSchedules +
                 '}';
     }
 }

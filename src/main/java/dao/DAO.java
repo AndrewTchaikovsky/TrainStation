@@ -10,8 +10,9 @@ public interface DAO<T> {
 
     List<T> getAll() throws SQLException;
 
-    int save(T t) throws SQLException;
-    int insert(T t) throws SQLException, IOException;
-    int update(T t) throws SQLException, IOException;
-    int delete(T t) throws SQLException, IOException;
+    void save(T t) throws SQLException, IOException;
+
+    void update(T t) throws SQLException, IOException;
+
+    void delete(T t) throws SQLException, IOException;
 }

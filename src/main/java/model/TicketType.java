@@ -2,17 +2,17 @@ package model;
 
 import java.util.List;
 
-public class PlatformType {
+public class TicketType {
     private int id;
     private String type;
-    List<Platform> platforms;
+    List<Ticket> tickets;
 
-    public PlatformType(int id, String type) {
+    public TicketType(int id, String type) {
         this.id = id;
         this.type = type;
     }
 
-    public PlatformType() {
+    public TicketType() {
     }
 
     public int getId() {
@@ -31,40 +31,40 @@ public class PlatformType {
         this.type = type;
     }
 
-    public List<Platform> getPlatforms() {
-        return platforms;
+    public List<Ticket> getTickets() {
+        return tickets;
     }
 
-    public void setPlatforms(List<Platform> platforms) {
-        this.platforms = platforms;
+    public void setTickets(List<Ticket> tickets) {
+        this.tickets = tickets;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof PlatformType)) return false;
+        if (!(o instanceof TicketType)) return false;
 
-        PlatformType that = (PlatformType) o;
+        TicketType that = (TicketType) o;
 
         if (getId() != that.getId()) return false;
         if (!getType().equals(that.getType())) return false;
-        return getPlatforms() != null ? getPlatforms().equals(that.getPlatforms()) : that.getPlatforms() == null;
+        return getTickets() != null ? getTickets().equals(that.getTickets()) : that.getTickets() == null;
     }
 
     @Override
     public int hashCode() {
         int result = getId();
         result = 31 * result + getType().hashCode();
-        result = 31 * result + (getPlatforms() != null ? getPlatforms().hashCode() : 0);
+        result = 31 * result + (getTickets() != null ? getTickets().hashCode() : 0);
         return result;
     }
 
     @Override
     public String toString() {
-        return "PlatformType{" +
+        return "TicketType{" +
                 "id=" + id +
                 ", type='" + type + '\'' +
-                ", platforms=" + platforms +
+                ", tickets=" + tickets +
                 '}';
     }
 }

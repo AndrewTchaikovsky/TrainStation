@@ -5,52 +5,28 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.Properties;
 
 public class Database {
-    private static Connection connection = null;
-    private static Properties properties = null;
+    private static final ConnectionPool connectionPool;
 
     static {
-        properties = new Properties();
-        try (FileInputStream fileInputStream = new FileInputStream("src/main/resources/config.properties")) {
+        Properties properties = loadProperties("src/main/resources/config.properties");
+        connectionPool = ConnectionPool.getInstance(properties, 7);
+    }
+
+    public static Connection getConnection() throws SQLException {
+        return connectionPool.getConnection();
+    }
+
+    private static Properties loadProperties(String filename) {
+        Properties properties = new Properties();
+        try (FileInputStream fileInputStream = new FileInputStream(filename)) {
             properties.load(fileInputStream);
-            Class.forName(properties.getProperty("driver"));
-            connection = DriverManager.getConnection(
-                    properties.getProperty("url"),
-                    properties.getProperty("username"),
-                    properties.getProperty("password")
-            );
-        } catch (ClassNotFoundException | SQLException | IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public static Connection getConnection() {
-        return connection;
-    }
-
-    public static void closePreparedStatement(PreparedStatement ps) {
-        try {
-            if (ps != null) {
-                ps.close();
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static void closeConnection(Connection con) {
-        try {
-            if (con != null) {
-                con.close();
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        return properties;
     }
 }

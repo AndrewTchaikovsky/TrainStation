@@ -1,11 +1,16 @@
 package model;
 
+import java.util.List;
+
 public class Employee {
     private int id;
     private String firstName;
     private String lastName;
     private String position;
     private int stationId;
+    TrainStation trainStation;
+    List<EmployeeShift> employeeShifts;
+    List<TrainMaintenance> trainMaintenances;
 
     public Employee(int id, String firstName, String lastName, String position, int stationId) {
         this.id = id;
@@ -58,6 +63,30 @@ public class Employee {
         this.stationId = stationId;
     }
 
+    public TrainStation getTrainStation() {
+        return trainStation;
+    }
+
+    public void setTrainStation(TrainStation trainStation) {
+        this.trainStation = trainStation;
+    }
+
+    public List<EmployeeShift> getEmployeeShifts() {
+        return employeeShifts;
+    }
+
+    public void setEmployeeShifts(List<EmployeeShift> employeeShifts) {
+        this.employeeShifts = employeeShifts;
+    }
+
+    public List<TrainMaintenance> getTrainMaintenances() {
+        return trainMaintenances;
+    }
+
+    public void setTrainMaintenances(List<TrainMaintenance> trainMaintenances) {
+        this.trainMaintenances = trainMaintenances;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -69,7 +98,12 @@ public class Employee {
         if (getStationId() != employee.getStationId()) return false;
         if (!getFirstName().equals(employee.getFirstName())) return false;
         if (!getLastName().equals(employee.getLastName())) return false;
-        return getPosition().equals(employee.getPosition());
+        if (!getPosition().equals(employee.getPosition())) return false;
+        if (getTrainStation() != null ? !getTrainStation().equals(employee.getTrainStation()) : employee.getTrainStation() != null)
+            return false;
+        if (getEmployeeShifts() != null ? !getEmployeeShifts().equals(employee.getEmployeeShifts()) : employee.getEmployeeShifts() != null)
+            return false;
+        return getTrainMaintenances() != null ? getTrainMaintenances().equals(employee.getTrainMaintenances()) : employee.getTrainMaintenances() == null;
     }
 
     @Override
@@ -79,6 +113,9 @@ public class Employee {
         result = 31 * result + getLastName().hashCode();
         result = 31 * result + getPosition().hashCode();
         result = 31 * result + getStationId();
+        result = 31 * result + (getTrainStation() != null ? getTrainStation().hashCode() : 0);
+        result = 31 * result + (getEmployeeShifts() != null ? getEmployeeShifts().hashCode() : 0);
+        result = 31 * result + (getTrainMaintenances() != null ? getTrainMaintenances().hashCode() : 0);
         return result;
     }
 
@@ -90,6 +127,9 @@ public class Employee {
                 ", lastName='" + lastName + '\'' +
                 ", position='" + position + '\'' +
                 ", stationId=" + stationId +
+                ", trainStation=" + trainStation +
+                ", employeeShifts=" + employeeShifts +
+                ", trainMaintenances=" + trainMaintenances +
                 '}';
     }
 }

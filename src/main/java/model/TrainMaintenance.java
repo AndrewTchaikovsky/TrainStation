@@ -1,23 +1,24 @@
 package model;
 
+import java.util.Date;
 import java.util.List;
 
-public class TrainSchedule {
+public class TrainMaintenance {
     private int id;
-    private String date;
-    private int stationId;
+    private Date date;
+    private String type;
     private int trainId;
-    TrainStation trainStation;
     Train train;
+    List<Employee> employees;
 
-    public TrainSchedule(int id, String date, int stationId, int trainId) {
+    public TrainMaintenance(int id, Date date, String type, int trainId) {
         this.id = id;
         this.date = date;
-        this.stationId = stationId;
+        this.type = type;
         this.trainId = trainId;
     }
 
-    public TrainSchedule() {
+    public TrainMaintenance() {
     }
 
     public int getId() {
@@ -28,20 +29,20 @@ public class TrainSchedule {
         this.id = id;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
-    public int getStationId() {
-        return stationId;
+    public String getType() {
+        return type;
     }
 
-    public void setStationId(int stationId) {
-        this.stationId = stationId;
+    public void setType(String type) {
+        this.type = type;
     }
 
     public int getTrainId() {
@@ -52,14 +53,6 @@ public class TrainSchedule {
         this.trainId = trainId;
     }
 
-    public TrainStation getTrainStation() {
-        return trainStation;
-    }
-
-    public void setTrainStation(TrainStation trainStation) {
-        this.trainStation = trainStation;
-    }
-
     public Train getTrain() {
         return train;
     }
@@ -68,42 +61,49 @@ public class TrainSchedule {
         this.train = train;
     }
 
+    public List<Employee> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(List<Employee> employees) {
+        this.employees = employees;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof TrainSchedule)) return false;
+        if (!(o instanceof TrainMaintenance)) return false;
 
-        TrainSchedule that = (TrainSchedule) o;
+        TrainMaintenance that = (TrainMaintenance) o;
 
         if (getId() != that.getId()) return false;
-        if (getStationId() != that.getStationId()) return false;
         if (getTrainId() != that.getTrainId()) return false;
         if (!getDate().equals(that.getDate())) return false;
-        if (getTrainStation() != null ? !getTrainStation().equals(that.getTrainStation()) : that.getTrainStation() != null)
-            return false;
-        return getTrain() != null ? getTrain().equals(that.getTrain()) : that.getTrain() == null;
+        if (!getType().equals(that.getType())) return false;
+        if (getTrain() != null ? !getTrain().equals(that.getTrain()) : that.getTrain() != null) return false;
+        return getEmployees() != null ? getEmployees().equals(that.getEmployees()) : that.getEmployees() == null;
     }
 
     @Override
     public int hashCode() {
         int result = getId();
         result = 31 * result + getDate().hashCode();
-        result = 31 * result + getStationId();
+        result = 31 * result + getType().hashCode();
         result = 31 * result + getTrainId();
-        result = 31 * result + (getTrainStation() != null ? getTrainStation().hashCode() : 0);
         result = 31 * result + (getTrain() != null ? getTrain().hashCode() : 0);
+        result = 31 * result + (getEmployees() != null ? getEmployees().hashCode() : 0);
         return result;
     }
 
     @Override
     public String toString() {
-        return "TrainSchedule{" +
+        return "TrainMaintenance{" +
                 "id=" + id +
-                ", date='" + date + '\'' +
-                ", stationId=" + stationId +
+                ", date=" + date +
+                ", type='" + type + '\'' +
                 ", trainId=" + trainId +
-                ", trainStation=" + trainStation +
                 ", train=" + train +
+                ", employees=" + employees +
                 '}';
     }
 }
