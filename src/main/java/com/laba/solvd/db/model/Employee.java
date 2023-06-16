@@ -1,4 +1,4 @@
-package model;
+package com.laba.solvd.db.model;
 
 import java.util.List;
 
@@ -7,20 +7,17 @@ public class Employee {
     private String firstName;
     private String lastName;
     private String position;
-    private int stationId;
-    TrainStation trainStation;
     List<EmployeeShift> employeeShifts;
     List<TrainMaintenance> trainMaintenances;
 
-    public Employee(int id, String firstName, String lastName, String position, int stationId) {
+    public Employee() {
+    }
+
+    public Employee(int id, String firstName, String lastName, String position) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.position = position;
-        this.stationId = stationId;
-    }
-
-    public Employee() {
     }
 
     public int getId() {
@@ -55,22 +52,6 @@ public class Employee {
         this.position = position;
     }
 
-    public int getStationId() {
-        return stationId;
-    }
-
-    public void setStationId(int stationId) {
-        this.stationId = stationId;
-    }
-
-    public TrainStation getTrainStation() {
-        return trainStation;
-    }
-
-    public void setTrainStation(TrainStation trainStation) {
-        this.trainStation = trainStation;
-    }
-
     public List<EmployeeShift> getEmployeeShifts() {
         return employeeShifts;
     }
@@ -95,12 +76,9 @@ public class Employee {
         Employee employee = (Employee) o;
 
         if (getId() != employee.getId()) return false;
-        if (getStationId() != employee.getStationId()) return false;
         if (!getFirstName().equals(employee.getFirstName())) return false;
         if (!getLastName().equals(employee.getLastName())) return false;
         if (!getPosition().equals(employee.getPosition())) return false;
-        if (getTrainStation() != null ? !getTrainStation().equals(employee.getTrainStation()) : employee.getTrainStation() != null)
-            return false;
         if (getEmployeeShifts() != null ? !getEmployeeShifts().equals(employee.getEmployeeShifts()) : employee.getEmployeeShifts() != null)
             return false;
         return getTrainMaintenances() != null ? getTrainMaintenances().equals(employee.getTrainMaintenances()) : employee.getTrainMaintenances() == null;
@@ -112,8 +90,6 @@ public class Employee {
         result = 31 * result + getFirstName().hashCode();
         result = 31 * result + getLastName().hashCode();
         result = 31 * result + getPosition().hashCode();
-        result = 31 * result + getStationId();
-        result = 31 * result + (getTrainStation() != null ? getTrainStation().hashCode() : 0);
         result = 31 * result + (getEmployeeShifts() != null ? getEmployeeShifts().hashCode() : 0);
         result = 31 * result + (getTrainMaintenances() != null ? getTrainMaintenances().hashCode() : 0);
         return result;
@@ -126,8 +102,6 @@ public class Employee {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", position='" + position + '\'' +
-                ", stationId=" + stationId +
-                ", trainStation=" + trainStation +
                 ", employeeShifts=" + employeeShifts +
                 ", trainMaintenances=" + trainMaintenances +
                 '}';

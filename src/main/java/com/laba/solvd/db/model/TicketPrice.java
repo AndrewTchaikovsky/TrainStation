@@ -1,17 +1,15 @@
-package model;
+package com.laba.solvd.db.model;
 
 public class TicketPrice {
     private int id;
     private double price;
-    private int ticketId;
-
-    public TicketPrice(int id, double price, int ticketId) {
-        this.id = id;
-        this.price = price;
-        this.ticketId = ticketId;
-    }
 
     public TicketPrice() {
+    }
+
+    public TicketPrice(int id, double price) {
+        this.id = id;
+        this.price = price;
     }
 
     public int getId() {
@@ -30,14 +28,6 @@ public class TicketPrice {
         this.price = price;
     }
 
-    public int getTicketId() {
-        return ticketId;
-    }
-
-    public void setTicketId(int ticketId) {
-        this.ticketId = ticketId;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -46,8 +36,7 @@ public class TicketPrice {
         TicketPrice that = (TicketPrice) o;
 
         if (getId() != that.getId()) return false;
-        if (Double.compare(that.getPrice(), getPrice()) != 0) return false;
-        return getTicketId() == that.getTicketId();
+        return Double.compare(that.getPrice(), getPrice()) == 0;
     }
 
     @Override
@@ -57,7 +46,6 @@ public class TicketPrice {
         result = getId();
         temp = Double.doubleToLongBits(getPrice());
         result = 31 * result + (int) (temp ^ (temp >>> 32));
-        result = 31 * result + getTicketId();
         return result;
     }
 
@@ -66,7 +54,6 @@ public class TicketPrice {
         return "TicketPrice{" +
                 "id=" + id +
                 ", price=" + price +
-                ", ticketId=" + ticketId +
                 '}';
     }
 }

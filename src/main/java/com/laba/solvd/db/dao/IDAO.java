@@ -1,10 +1,10 @@
-package dao;
+package com.laba.solvd.db.dao;
 
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-public interface DAO<T> {
+public interface IDAO<T> {
 
     T get(int id) throws SQLException, IOException;
 

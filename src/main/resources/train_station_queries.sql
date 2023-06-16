@@ -13,25 +13,29 @@ INSERT INTO trains
 VALUES (
 DEFAULT,
 '20th Century Limited',
-'passenger train',
-1
+'passenger train'
 );
 
 INSERT INTO train_schedules
 VALUES (
 DEFAULT,
-1,
 '2023-01-01',
-'2023-01-02',
-1
+30,
+26
 );
 
 INSERT INTO train_maintenance
 VALUES (
 DEFAULT,
-1,
 '2023-06-01',
-'Corrective Railway Maintenance'
+'Corrective Railway Maintenance',
+26
+);
+
+INSERT INTO platform_types
+VALUES (
+DEFAULT,
+'passenger platform'
 );
 
 INSERT INTO platforms
@@ -39,9 +43,7 @@ VALUES (
 DEFAULT,
 1,
 1,
-2,
-'passenger platform',
-1
+30
 );
 
 INSERT INTO employees
@@ -50,15 +52,13 @@ DEFAULT,
 'John',
 'Doe',
 'Maintenance guy',
-1
+30
 );
 
 INSERT INTO maintenance_employees
 VALUES (
-DEFAULT,
-1,
-1,
-'God of Maintenance'
+27,
+33
 );
 
 INSERT INTO employee_shifts
@@ -66,7 +66,7 @@ VALUES (
 DEFAULT,
 '2023-09-01',
 '2023-09-07',
-1
+33
 );
 
 INSERT INTO passengers
@@ -74,7 +74,15 @@ VALUES (
 DEFAULT,
 'Jane',
 'Doe',
-1
+26
+);
+
+INSERT INTO tickets
+VALUES (
+DEFAULT,
+3,
+83,
+53
 );
 
 INSERT INTO ticket_types (type)
@@ -85,19 +93,18 @@ VALUES
 
 -- multiple rows insertion
 
-INSERT INTO ticket_prices (price)
+INSERT INTO ticket_prices (price, ticket_id)
 VALUES 
-(18.5),
-(34.2),
-(40);
+(18.5, 42),
+(34.2, 43),
+(40, 44);
 
 INSERT INTO tickets
 VALUES (
 DEFAULT,
-1,
-1,
-LAST_INSERT_ID(),
-1
+4,
+83,
+LAST_INSERT_ID()
 );
 
 -- 10 statements for updating.

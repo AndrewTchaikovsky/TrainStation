@@ -1,10 +1,7 @@
-package dao;
+package com.laba.solvd.db.dao;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.sql.*;
 import java.util.Properties;
 

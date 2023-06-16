@@ -1,4 +1,4 @@
-package model;
+package com.laba.solvd.db.model;
 
 import java.util.List;
 
@@ -10,13 +10,13 @@ public class TrainStation {
     private List<Platform> platforms;
     private List<TrainSchedule> trainSchedules;
 
+    public TrainStation() {
+    }
+
     public TrainStation(int id, String name, String location) {
         this.id = id;
         this.name = name;
         this.location = location;
-    }
-
-    public TrainStation() {
     }
 
     public int getId() {
