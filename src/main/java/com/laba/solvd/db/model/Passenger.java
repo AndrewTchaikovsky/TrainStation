@@ -6,7 +6,7 @@ public class Passenger {
     private int id;
     private String firstName;
     private String lastName;
-    List<Ticket> tickets;
+    private List<Ticket> tickets;
 
     public Passenger() {
     }

@@ -6,9 +6,9 @@ public class Train {
     private int id;
     private String name;
     private String type;
-    List<TrainSchedule> trainSchedules;
-    List<TrainMaintenance> trainMaintenances;
-    List<Passenger> passengers;
+    private List<TrainSchedule> trainSchedules;
+    private List<TrainMaintenance> trainMaintenances;
+    private List<Passenger> passengers;
 
     public Train() {
     }

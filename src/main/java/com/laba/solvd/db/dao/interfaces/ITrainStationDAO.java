@@ -1,4 +1,4 @@
-package com.laba.solvd.db.dao;
+package com.laba.solvd.db.dao.interfaces;
 
 import com.laba.solvd.db.model.Employee;
 import com.laba.solvd.db.model.Platform;

@@ -7,7 +7,6 @@ public class TrainMaintenance {
     private int id;
     private Date date;
     private String type;
-    List<Employee> employees;
 
     public TrainMaintenance() {
     }
@@ -42,14 +41,6 @@ public class TrainMaintenance {
         this.type = type;
     }
 
-    public List<Employee> getEmployees() {
-        return employees;
-    }
-
-    public void setEmployees(List<Employee> employees) {
-        this.employees = employees;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -59,8 +50,7 @@ public class TrainMaintenance {
 
         if (getId() != that.getId()) return false;
         if (!getDate().equals(that.getDate())) return false;
-        if (!getType().equals(that.getType())) return false;
-        return getEmployees() != null ? getEmployees().equals(that.getEmployees()) : that.getEmployees() == null;
+        return getType().equals(that.getType());
     }
 
     @Override
@@ -68,7 +58,6 @@ public class TrainMaintenance {
         int result = getId();
         result = 31 * result + getDate().hashCode();
         result = 31 * result + getType().hashCode();
-        result = 31 * result + (getEmployees() != null ? getEmployees().hashCode() : 0);
         return result;
     }
 
@@ -78,7 +67,6 @@ public class TrainMaintenance {
                 "id=" + id +
                 ", date=" + date +
                 ", type='" + type + '\'' +
-                ", employees=" + employees +
                 '}';
     }
 }

@@ -7,8 +7,8 @@ public class Employee {
     private String firstName;
     private String lastName;
     private String position;
-    List<EmployeeShift> employeeShifts;
-    List<TrainMaintenance> trainMaintenances;
+    private List<EmployeeShift> employeeShifts;
+    private List<TrainMaintenance> trainMaintenances;
 
     public Employee() {
     }

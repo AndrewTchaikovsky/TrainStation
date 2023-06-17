@@ -3,8 +3,8 @@ package com.laba.solvd.db.model;
 public class Ticket {
     private int id;
     private int seatNumber;
-    TicketType ticketType;
-    TicketPrice ticketPrice;
+    private TicketType ticketType;
+    private TicketPrice ticketPrice;
 
     public Ticket() {
     }

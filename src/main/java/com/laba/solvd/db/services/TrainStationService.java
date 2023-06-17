@@ -1,8 +1,8 @@
 package com.laba.solvd.db.services;
 
 
-import com.laba.solvd.db.dao.ITrainStationDAO;
-import com.laba.solvd.db.dao.TrainStationDAO;
+import com.laba.solvd.db.dao.interfaces.ITrainStationDAO;
+import com.laba.solvd.db.dao.implementation.TrainStationDAO;
 import com.laba.solvd.db.model.Employee;
 import com.laba.solvd.db.model.Platform;
 import com.laba.solvd.db.model.TrainSchedule;
@@ -10,13 +10,12 @@ import com.laba.solvd.db.model.TrainStation;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class TrainStationService {
         private ITrainStationDAO trainStationDAO = new TrainStationDAO();
 
-    public TrainStationService() {
+    public TrainStationService() throws SQLException {
     }
 
     public TrainStation getTrainStation(int id) throws SQLException, IOException {
@@ -38,7 +37,7 @@ public class TrainStationService {
         }
 
         public void saveTrainStation(TrainStation trainStation) throws SQLException, IOException {
-            trainStationDAO.save(trainStation);
+            trainStationDAO.create(trainStation);
         }
 
         public void updateTrainStation(TrainStation trainStation) throws SQLException, IOException {

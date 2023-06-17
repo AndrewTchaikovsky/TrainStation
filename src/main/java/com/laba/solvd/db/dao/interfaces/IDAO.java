@@ -1,4 +1,4 @@
-package com.laba.solvd.db.dao;
+package com.laba.solvd.db.dao.interfaces;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -10,7 +10,7 @@ public interface IDAO<T> {
 
     List<T> getAll() throws SQLException;
 
-    void save(T t) throws SQLException, IOException;
+    void create(T t) throws SQLException, IOException;
 
     void update(T t) throws SQLException, IOException;
 

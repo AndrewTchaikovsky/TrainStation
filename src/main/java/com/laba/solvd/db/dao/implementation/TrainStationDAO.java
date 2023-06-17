@@ -1,6 +1,8 @@
-package com.laba.solvd.db.dao;
+package com.laba.solvd.db.dao.implementation;
 
 
+import com.laba.solvd.db.dao.connection.ConnectionPool;
+import com.laba.solvd.db.dao.interfaces.ITrainStationDAO;
 import com.laba.solvd.db.model.Employee;
 import com.laba.solvd.db.model.Platform;
 import com.laba.solvd.db.model.TrainSchedule;
@@ -12,13 +14,19 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+
+
 public class TrainStationDAO implements ITrainStationDAO {
+    ConnectionPool connectionPool = ConnectionPool.create();
+
+    public TrainStationDAO() throws SQLException {
+    }
 
     @Override
     public TrainStation get(int id) throws SQLException, IOException {
         TrainStation trainStation = null;
         String sql = "SELECT id, name, location FROM train_stations WHERE id = ?";
-        try (Connection connection = Database.getConnection();
+        try (Connection connection = connectionPool.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setInt(1, id);
 
@@ -40,7 +48,7 @@ public class TrainStationDAO implements ITrainStationDAO {
         TrainStation trainStation;
         List<TrainStation> trainStations = new ArrayList<>();
         String sql = "SELECT id, name, location FROM train_stations";
-        try (Connection connection = Database.getConnection();
+        try (Connection connection = connectionPool.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
             ResultSet rs = ps.executeQuery();
 
@@ -58,9 +66,9 @@ public class TrainStationDAO implements ITrainStationDAO {
 
 
     @Override
-    public void save(TrainStation trainStation) throws SQLException {
+    public void create(TrainStation trainStation) throws SQLException {
         String sql = "INSERT INTO train_stations (name, location) VALUES (?, ?)";
-        try (Connection connection = Database.getConnection();
+        try (Connection connection = connectionPool.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setString(1, trainStation.getName());
             ps.setString(2, trainStation.getLocation());
@@ -73,7 +81,7 @@ public class TrainStationDAO implements ITrainStationDAO {
     @Override
     public void update(TrainStation trainStation) throws SQLException, IOException {
         String sql = "UPDATE train_stations SET name = ?, location = ? WHERE id = ?";
-        try (Connection connection = Database.getConnection();
+        try (Connection connection = connectionPool.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setString(1, trainStation.getName());
             ps.setString(2, trainStation.getLocation());
@@ -86,7 +94,7 @@ public class TrainStationDAO implements ITrainStationDAO {
     @Override
     public void delete(TrainStation trainStation) throws SQLException, IOException {
         String sql = "DELETE FROM train_stations WHERE id = ?";
-        try (Connection connection = Database.getConnection();
+        try (Connection connection = connectionPool.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setInt(1, trainStation.getId());
             ps.executeUpdate();
@@ -99,7 +107,7 @@ public class TrainStationDAO implements ITrainStationDAO {
         Employee employee;
         List<Employee> employees = new ArrayList<>();
         String sql = "SELECT e.id, first_name, last_name, position FROM train_stations ts LEFT JOIN employees e ON ts.id = e.station_id WHERE ts.id = ?";
-        try (Connection connection = Database.getConnection();
+        try (Connection connection = connectionPool.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
@@ -121,7 +129,7 @@ public class TrainStationDAO implements ITrainStationDAO {
         Platform platform;
         List<Platform> platforms = new ArrayList<>();
         String sql = "SELECT p.id, number FROM train_stations ts LEFT JOIN platforms p ON ts.id = p.station_id WHERE ts.id = ?";
-        try (Connection connection = Database.getConnection();
+        try (Connection connection = connectionPool.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
@@ -141,7 +149,7 @@ public class TrainStationDAO implements ITrainStationDAO {
         TrainSchedule trainSchedule;
         List<TrainSchedule> trainSchedules = new ArrayList<>();
         String sql = "SELECT tsch.id, date FROM train_stations ts LEFT JOIN train_schedules tsch ON ts.id = tsch.station_id WHERE ts.id = ?";
-        try (Connection connection = Database.getConnection();
+        try (Connection connection = connectionPool.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();

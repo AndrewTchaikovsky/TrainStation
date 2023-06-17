@@ -3,7 +3,7 @@ package com.laba.solvd.db.model;
 public class Platform {
     private int id;
     private int number;
-    PlatformType platformTypes;
+    private PlatformType platformTypes;
 
     public Platform() {
     }
