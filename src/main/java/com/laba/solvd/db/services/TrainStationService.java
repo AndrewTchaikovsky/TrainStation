@@ -36,7 +36,7 @@ public class TrainStationService {
             return trainStationDAO.getAll();
         }
 
-        public void saveTrainStation(TrainStation trainStation) throws SQLException, IOException {
+        public void createTrainStation(TrainStation trainStation) throws SQLException, IOException {
             trainStationDAO.create(trainStation);
         }
 
@@ -47,4 +47,5 @@ public class TrainStationService {
         public void deleteTrainStation(TrainStation trainStation) throws SQLException, IOException {
             trainStationDAO.delete(trainStation);
         }
+
     }

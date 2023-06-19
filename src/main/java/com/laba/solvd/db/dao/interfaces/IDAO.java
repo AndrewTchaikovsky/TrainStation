@@ -10,8 +10,6 @@ public interface IDAO<T> {
 
     List<T> getAll() throws SQLException;
 
-    void create(T t) throws SQLException, IOException;
-
     void update(T t) throws SQLException, IOException;
 
     void delete(T t) throws SQLException, IOException;

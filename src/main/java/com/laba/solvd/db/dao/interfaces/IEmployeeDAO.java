@@ -10,6 +10,8 @@ import java.util.List;
 
 public interface IEmployeeDAO extends IDAO<Employee> {
 
+    void create(Employee employee, int stationId) throws SQLException, IOException;
+
     List<EmployeeShift> getEmployeeShiftsByEmployeeId(int id) throws SQLException, IOException;
     List<TrainMaintenance> getTrainMaintenancesByEmployeeId(int id) throws SQLException, IOException;
 

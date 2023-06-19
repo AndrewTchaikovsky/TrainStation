@@ -50,6 +50,7 @@ public class TrainStationDAO implements ITrainStationDAO {
         String sql = "SELECT id, name, location FROM train_stations";
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
+
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -85,6 +86,7 @@ public class TrainStationDAO implements ITrainStationDAO {
              PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setString(1, trainStation.getName());
             ps.setString(2, trainStation.getLocation());
+            ps.setInt(3, trainStation.getId());
             ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();

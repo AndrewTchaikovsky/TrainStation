@@ -1,5 +1,7 @@
 package com.laba.solvd.db.model;
 
+import com.laba.solvd.db.dao.interfaces.IPlatformDAO;
+
 public class Platform {
     private int id;
     private int number;
