@@ -11,6 +11,8 @@ import java.util.List;
 
 public interface ITrainStationDAO extends IDAO<TrainStation> {
     void create(TrainStation trainStation) throws SQLException, IOException;
+
+
     List<Employee> getEmployeesByTrainStationId(int id) throws SQLException, IOException;
     List<Platform> getPlatformsByTrainStationId(int id) throws SQLException, IOException;
     List<TrainSchedule> getTrainSchedulesByTrainStationId(int id) throws SQLException, IOException;

@@ -3,24 +3,24 @@ package com.laba.solvd.db.model;
 import java.util.Date;
 
 public class EmployeeShift {
-    private int id;
+    private Integer id;
     private Date startDate;
     private Date endDate;
 
     public EmployeeShift() {
     }
 
-    public EmployeeShift(int id, Date startDate, Date endDate) {
+    public EmployeeShift(Integer id, Date startDate, Date endDate) {
         this.id = id;
         this.startDate = startDate;
         this.endDate = endDate;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

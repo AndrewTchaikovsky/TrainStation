@@ -12,5 +12,5 @@ public interface IDAO<T> {
 
     void update(T t) throws SQLException, IOException;
 
-    void delete(T t) throws SQLException, IOException;
+    void delete(Integer id) throws SQLException, IOException;
 }

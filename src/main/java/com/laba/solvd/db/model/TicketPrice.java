@@ -1,22 +1,22 @@
 package com.laba.solvd.db.model;
 
 public class TicketPrice {
-    private int id;
+    private Integer id;
     private double price;
 
     public TicketPrice() {
     }
 
-    public TicketPrice(int id, double price) {
+    public TicketPrice(Integer id, double price) {
         this.id = id;
         this.price = price;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

@@ -234,20 +234,17 @@ SELECT
     ts.name AS 'train station\'s name',
     ts.location,
     pl.number AS 'platform number',
-    pl.tracks_count AS 'number of tracks',
-    pl.type AS 'platform type',
+    pt.type AS 'platform type',
     e.first_name AS 'employee\'s first name',
     e.last_name AS 'employee\'s last name',
     e.position,
     esh.start_date,
     esh.end_date,
-    me.grade,
     tm.date AS 'maintenance date',
     tm.type AS 'maintenance type',
     t.name AS 'train\'s name',
-    t.type AS 'train\' type',
-    tsch.departure_date,
-    tsch.arrival_date,
+    t.type AS 'train\'s type',
+    tsch.date,
     p.first_name AS 'passenger\'s first name',
     p.last_name AS 'passenger\'s last name',
     tkts.seat_number,
@@ -256,6 +253,8 @@ SELECT
 FROM train_stations ts
 LEFT JOIN platforms pl
 	ON ts.id = pl.station_id
+LEFT JOIN platform_types pt
+	ON pt.id = pl.type_id
 LEFT JOIN employees e
 	ON ts.id = e.station_id
 LEFT JOIN employee_shifts esh
@@ -263,7 +262,7 @@ LEFT JOIN employee_shifts esh
 LEFT JOIN maintenance_employees me
 	ON e.id = me.employee_id
 LEFT JOIN train_maintenance tm
-	ON tm.id = me.train_maintenance_id
+	ON tm.id = me.maintenance_id
 LEFT JOIN trains t
 	ON t.id = tm.train_id
 LEFT JOIN train_schedules tsch
@@ -275,7 +274,7 @@ LEFT JOIN tickets tkts
 LEFT JOIN ticket_types tt
 	ON tt.id = tkts.type_id
 LEFT JOIN ticket_prices tp
-	ON tp.id = tkts.price_id;
+	ON tp.ticket_id = tkts.id;
 
 -- 5 statements with left, right, inner, outer joins.
 

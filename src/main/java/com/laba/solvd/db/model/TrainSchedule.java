@@ -3,22 +3,22 @@ package com.laba.solvd.db.model;
 import java.util.Date;
 
 public class TrainSchedule {
-    private int id;
+    private Integer id;
     private Date date;
 
     public TrainSchedule() {
     }
 
-    public TrainSchedule(int id, Date date) {
+    public TrainSchedule(Integer id, Date date) {
         this.id = id;
         this.date = date;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

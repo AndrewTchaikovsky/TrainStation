@@ -4,24 +4,24 @@ import java.util.Date;
 import java.util.List;
 
 public class TrainMaintenance {
-    private int id;
+    private Integer id;
     private Date date;
     private String type;
 
     public TrainMaintenance() {
     }
 
-    public TrainMaintenance(int id, Date date, String type) {
+    public TrainMaintenance(Integer id, Date date, String type) {
         this.id = id;
         this.date = date;
         this.type = type;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

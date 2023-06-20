@@ -1,7 +1,7 @@
 package com.laba.solvd.db.model;
 
 public class Ticket {
-    private int id;
+    private Integer id;
     private int seatNumber;
     private TicketType ticketType;
     private TicketPrice ticketPrice;
@@ -9,16 +9,16 @@ public class Ticket {
     public Ticket() {
     }
 
-    public Ticket(int id, int seatNumber) {
+    public Ticket(Integer id, int seatNumber) {
         this.id = id;
         this.seatNumber = seatNumber;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

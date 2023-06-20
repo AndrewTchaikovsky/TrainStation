@@ -9,6 +9,7 @@ import com.laba.solvd.db.model.TrainMaintenance;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class EmployeeService {
     private IEmployeeDAO employeeDAO = new EmployeeDAO();
@@ -20,7 +21,7 @@ public class EmployeeService {
         return employeeDAO.get(id);
     }
 
-    public Employee getEmployeeWithLists (int id) throws SQLException, IOException {
+    public Employee getEmployeeWithLists(int id) throws SQLException, IOException {
         Employee employee = employeeDAO.get(id);
         List<EmployeeShift> employeeShifts = employeeDAO.getEmployeeShiftsByEmployeeId(id);
         employee.setEmployeeShifts(employeeShifts);
@@ -33,15 +34,18 @@ public class EmployeeService {
         return employeeDAO.getAll();
     }
 
-    public void createEmployee(Employee employee, int stationId) throws SQLException, IOException {
+    public Employee create(Employee employee, int stationId) throws SQLException, IOException {
+        employee.setId(null);
         employeeDAO.create(employee, stationId);
+        return employee;
     }
+
 
     public void updateEmployee(Employee employee) throws SQLException, IOException {
         employeeDAO.update(employee);
     }
 
     public void deleteEmployee(Employee employee) throws SQLException, IOException {
-        employeeDAO.delete(employee);
+        employeeDAO.delete(employee.getId());
     }
 }

@@ -1,5 +1,6 @@
 package com.laba.solvd.db.dao.connection;
 
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
@@ -10,20 +11,25 @@ import java.util.List;
 import java.util.Properties;
 
 public class ConnectionPool {
-    private List<Connection> connectionPool;
-    private List<Connection> usedConnections = new ArrayList<>();
-    private static int INITIAL_POOL_SIZE = 10;
+
+    private final List<Connection> connectionPool;
+    private final List<Connection> usedConnections = new ArrayList<>();
+    private static final int INITIAL_POOL_SIZE = 10;
 
     public ConnectionPool(List<Connection> pool) {
         this.connectionPool = pool;
     }
 
 
-    public static ConnectionPool create() throws SQLException {
+    public static ConnectionPool getInstance() {
 
         List<Connection> pool = new ArrayList<>(INITIAL_POOL_SIZE);
         for (int i = 0; i < INITIAL_POOL_SIZE; i++) {
-            pool.add(createConnection());
+            try {
+                pool.add(createConnection());
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
         }
         return new ConnectionPool(pool);
     }

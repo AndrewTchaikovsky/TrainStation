@@ -3,7 +3,7 @@ package com.laba.solvd.db.model;
 import java.util.List;
 
 public class TrainStation {
-    private int id;
+    private Integer id;
     private String name;
     private String location;
     private List<Employee> employees;
@@ -18,7 +18,7 @@ public class TrainStation {
         this.location = location;
     }
 
-    public TrainStation(int id, String name, String location) {
+    public TrainStation(Integer id, String name, String location) {
         this.id = id;
         this.name = name;
         this.location = location;
@@ -26,11 +26,11 @@ public class TrainStation {
 
 
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

@@ -1,25 +1,22 @@
 package com.laba.solvd.db.model;
 
-import com.laba.solvd.db.dao.interfaces.IPlatformDAO;
-
 public class Platform {
-    private int id;
+    private Integer id;
     private int number;
     private PlatformType platformTypes;
 
     public Platform() {
     }
 
-    public Platform(int id, int number) {
-        this.id = id;
+    public Platform(int number) {
         this.number = number;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
