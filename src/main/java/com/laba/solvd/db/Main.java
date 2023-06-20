@@ -19,8 +19,6 @@ import java.util.List;
 public class Main {
     public static Logger logger = Logger.getLogger(Main.class);
 
-//    public static HikariDataSource dataSource;
-
     public static void main(String[] args) throws SQLException, IOException {
 
         TrainStation trainStation = new TrainStation("Grand Central Terminal", "New York, NY");
