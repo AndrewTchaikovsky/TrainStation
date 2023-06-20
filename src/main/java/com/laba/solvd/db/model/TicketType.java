@@ -1,7 +1,5 @@
 package com.laba.solvd.db.model;
 
-import java.util.List;
-
 public class TicketType {
     private Integer id;
     private String type;

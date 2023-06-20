@@ -5,9 +5,11 @@ import com.laba.solvd.db.dao.implementation.PlatformDAO;
 import com.laba.solvd.db.dao.implementation.TrainStationDAO;
 import com.laba.solvd.db.model.Employee;
 import com.laba.solvd.db.model.Platform;
+import com.laba.solvd.db.model.PlatformType;
 import com.laba.solvd.db.model.TrainStation;
 import com.laba.solvd.db.services.EmployeeService;
 import com.laba.solvd.db.services.PlatformService;
+import com.laba.solvd.db.services.PlatformTypeService;
 import com.laba.solvd.db.services.TrainStationService;
 import org.apache.log4j.Logger;
 
@@ -26,6 +28,11 @@ public class Main {
         Employee employee = new Employee("John", "Doe", "Conductor");
         List<Employee> employees = new ArrayList<>();
         employees.add(employee);
+
+
+        PlatformType platformType = new PlatformType("Cargo2 Platform");
+        PlatformTypeService platformTypeService = new PlatformTypeService();
+        platformTypeService.create(platformType);
 
         Platform platform = new Platform(121);
         List<Platform> platforms = new ArrayList<>();

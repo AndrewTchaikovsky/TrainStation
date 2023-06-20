@@ -8,6 +8,11 @@ public class Platform {
     public Platform() {
     }
 
+    public Platform(Integer id, int number) {
+        this.id = id;
+        this.number = number;
+    }
+
     public Platform(int number) {
         this.number = number;
     }
@@ -28,11 +33,11 @@ public class Platform {
         this.number = number;
     }
 
-    public PlatformType getPlatformTypes() {
+    public PlatformType getPlatformType() {
         return platformTypes;
     }
 
-    public void setPlatformTypes(PlatformType platformTypes) {
+    public void setPlatformType(PlatformType platformTypes) {
         this.platformTypes = platformTypes;
     }
 
@@ -45,14 +50,14 @@ public class Platform {
 
         if (getId() != platform.getId()) return false;
         if (getNumber() != platform.getNumber()) return false;
-        return getPlatformTypes() != null ? getPlatformTypes().equals(platform.getPlatformTypes()) : platform.getPlatformTypes() == null;
+        return getPlatformType() != null ? getPlatformType().equals(platform.getPlatformType()) : platform.getPlatformType() == null;
     }
 
     @Override
     public int hashCode() {
         int result = getId();
         result = 31 * result + getNumber();
-        result = 31 * result + (getPlatformTypes() != null ? getPlatformTypes().hashCode() : 0);
+        result = 31 * result + (getPlatformType() != null ? getPlatformType().hashCode() : 0);
         return result;
     }
 
@@ -64,4 +69,6 @@ public class Platform {
                 ", platformTypes=" + platformTypes +
                 '}';
     }
+
+
 }

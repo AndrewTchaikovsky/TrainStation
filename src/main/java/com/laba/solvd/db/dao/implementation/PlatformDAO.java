@@ -125,7 +125,7 @@ public class PlatformDAO implements IPlatformDAO {
     }
 
     public static List<Platform> mapRow(ResultSet rs, List<Platform> platforms) throws SQLException {
-        Integer id = rs.getInt("id");
+        int id = rs.getInt("id");
 
         if (id != 0) {
             if (platforms == null) {

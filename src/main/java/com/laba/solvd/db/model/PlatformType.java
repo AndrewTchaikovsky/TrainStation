@@ -14,6 +14,10 @@ public class PlatformType {
         this.type = type;
     }
 
+    public PlatformType(String type) {
+        this.type = type;
+    }
+
     public Integer getId() {
         return id;
     }
