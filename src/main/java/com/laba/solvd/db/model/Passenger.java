@@ -11,8 +11,7 @@ public class Passenger {
     public Passenger() {
     }
 
-    public Passenger(Integer id, String firstName, String lastName) {
-        this.id = id;
+    public Passenger(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
     }

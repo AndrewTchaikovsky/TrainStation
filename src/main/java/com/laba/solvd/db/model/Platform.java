@@ -3,14 +3,9 @@ package com.laba.solvd.db.model;
 public class Platform {
     private Integer id;
     private int number;
-    private PlatformType platformTypes;
+    private PlatformStatus platformStatus;
 
     public Platform() {
-    }
-
-    public Platform(Integer id, int number) {
-        this.id = id;
-        this.number = number;
     }
 
     public Platform(int number) {
@@ -33,12 +28,12 @@ public class Platform {
         this.number = number;
     }
 
-    public PlatformType getPlatformType() {
-        return platformTypes;
+    public PlatformStatus getPlatformStatus() {
+        return platformStatus;
     }
 
-    public void setPlatformType(PlatformType platformTypes) {
-        this.platformTypes = platformTypes;
+    public void setPlatformStatus(PlatformStatus platformStatus) {
+        this.platformStatus = platformStatus;
     }
 
     @Override
@@ -48,16 +43,16 @@ public class Platform {
 
         Platform platform = (Platform) o;
 
-        if (getId() != platform.getId()) return false;
         if (getNumber() != platform.getNumber()) return false;
-        return getPlatformType() != null ? getPlatformType().equals(platform.getPlatformType()) : platform.getPlatformType() == null;
+        if (!getId().equals(platform.getId())) return false;
+        return getPlatformStatus().equals(platform.getPlatformStatus());
     }
 
     @Override
     public int hashCode() {
-        int result = getId();
+        int result = getId().hashCode();
         result = 31 * result + getNumber();
-        result = 31 * result + (getPlatformType() != null ? getPlatformType().hashCode() : 0);
+        result = 31 * result + getPlatformStatus().hashCode();
         return result;
     }
 
@@ -66,9 +61,7 @@ public class Platform {
         return "Platform{" +
                 "id=" + id +
                 ", number=" + number +
-                ", platformTypes=" + platformTypes +
+                ", platformStatus=" + platformStatus +
                 '}';
     }
-
-
 }

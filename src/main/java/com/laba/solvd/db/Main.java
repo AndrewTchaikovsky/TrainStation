@@ -1,16 +1,13 @@
 package com.laba.solvd.db;
 
-import com.laba.solvd.db.dao.implementation.EmployeeDAO;
-import com.laba.solvd.db.dao.implementation.PlatformDAO;
-import com.laba.solvd.db.dao.implementation.TrainStationDAO;
 import com.laba.solvd.db.model.Employee;
 import com.laba.solvd.db.model.Platform;
-import com.laba.solvd.db.model.PlatformType;
+import com.laba.solvd.db.model.PlatformStatus;
 import com.laba.solvd.db.model.TrainStation;
-import com.laba.solvd.db.services.EmployeeService;
-import com.laba.solvd.db.services.PlatformService;
-import com.laba.solvd.db.services.PlatformTypeService;
-import com.laba.solvd.db.services.TrainStationService;
+import com.laba.solvd.db.services.implementation.EmployeeService;
+import com.laba.solvd.db.services.implementation.PlatformService;
+import com.laba.solvd.db.services.implementation.PlatformStatusService;
+import com.laba.solvd.db.services.implementation.TrainStationService;
 import org.apache.log4j.Logger;
 
 import java.io.IOException;
@@ -24,24 +21,20 @@ public class Main {
     public static void main(String[] args) throws SQLException, IOException {
 
         TrainStation trainStation = new TrainStation("Grand Central Terminal", "New York, NY");
+        TrainStationService trainStationService = new TrainStationService();
 
         Employee employee = new Employee("John", "Doe", "Conductor");
         List<Employee> employees = new ArrayList<>();
         employees.add(employee);
-
-
-        PlatformType platformType = new PlatformType("Cargo2 Platform");
-        PlatformTypeService platformTypeService = new PlatformTypeService();
-        platformTypeService.create(platformType);
+        trainStation.setEmployees(employees);
 
         Platform platform = new Platform(121);
+        PlatformStatus platformStatus = new PlatformStatus("Active");
         List<Platform> platforms = new ArrayList<>();
+        platform.setPlatformStatus(platformStatus);
         platforms.add(platform);
-
-        trainStation.setEmployees(employees);
         trainStation.setPlatforms(platforms);
 
-        TrainStationService trainStationService = new TrainStationService();
         logger.info(trainStationService.create(trainStation));
 
 }

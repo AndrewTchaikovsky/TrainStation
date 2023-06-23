@@ -9,8 +9,7 @@ public class TrainSchedule {
     public TrainSchedule() {
     }
 
-    public TrainSchedule(Integer id, Date date) {
-        this.id = id;
+    public TrainSchedule(Date date) {
         this.date = date;
     }
 

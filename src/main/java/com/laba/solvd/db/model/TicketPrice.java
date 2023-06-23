@@ -7,8 +7,7 @@ public class TicketPrice {
     public TicketPrice() {
     }
 
-    public TicketPrice(Integer id, double price) {
-        this.id = id;
+    public TicketPrice(double price) {
         this.price = price;
     }
 

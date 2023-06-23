@@ -9,8 +9,7 @@ public class Ticket {
     public Ticket() {
     }
 
-    public Ticket(Integer id, int seatNumber) {
-        this.id = id;
+    public Ticket(int seatNumber) {
         this.seatNumber = seatNumber;
     }
 

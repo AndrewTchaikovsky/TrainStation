@@ -3,13 +3,9 @@ package com.laba.solvd.db.dao.implementation;
 
 import com.laba.solvd.db.dao.connection.ConnectionPool;
 import com.laba.solvd.db.dao.interfaces.ITrainStationDAO;
-import com.laba.solvd.db.model.Employee;
-import com.laba.solvd.db.model.Platform;
-import com.laba.solvd.db.model.TrainSchedule;
-import com.laba.solvd.db.model.TrainStation;
+import com.laba.solvd.db.model.*;
 import org.apache.log4j.Logger;
 
-import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -19,28 +15,35 @@ import java.util.List;
 public class TrainStationDAO implements ITrainStationDAO {
     public static Logger logger = Logger.getLogger(TrainStationDAO.class);
     public static final ConnectionPool connectionPool = ConnectionPool.getInstance();
-    private static final String FIND_ALL_QUERIES = "SELECT ts.name AS 'train station name', ts.location, pl.number AS 'platform number', " +
-            "e.first_name AS 'employee first name', e.last_name AS 'employee last name', e.position " +
-            "FROM train_stations ts " +
-            "LEFT JOIN platforms pl ON ts.id = pl.station_id " +
-            "LEFT JOIN employees e ON ts.id = e.station_id";
+    private static final String FIND_ALL_QUERIES = "SELECT \n" +
+            "ts.id AS train_station_id, \n" +
+            "ts.name AS train_station_name, \n" +
+            "ts.location AS train_station_location, \n" +
+            "pl.number AS platform_number, \n" +
+            "ps.status AS platform_status,\n" +
+            "e.first_name AS employee_first_name, \n" +
+            "e.last_name AS employee_last_name, \n" +
+            "e.position\n" +
+            "FROM train_stations ts\n" +
+            "LEFT JOIN platforms pl ON ts.id = pl.station_id\n" +
+            "LEFT JOIN employees e ON ts.id = e.station_id\n" +
+            "LEFT JOIN platform_statuses ps ON pl.id = ps.platform_id";
 
     @Override
-    public TrainStation get(int id) throws SQLException, IOException {
+    public TrainStation get(int id) {
         Connection connection = connectionPool.getConnection();
         TrainStation trainStation = null;
-        String sql = "SELECT id, name, location FROM train_stations WHERE id = ?";
+        String sql = "SELECT name, location FROM train_stations WHERE id = ?";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setInt(1, id);
 
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
-                int trainStationId = rs.getInt("id");
                 String name = rs.getString("name");
                 String location = rs.getString("location");
 
-                trainStation = new TrainStation(trainStationId, name, location);
+                trainStation = new TrainStation(name, location);
             }
 
         } catch (SQLException e) {
@@ -52,7 +55,7 @@ public class TrainStationDAO implements ITrainStationDAO {
     }
 
     @Override
-    public List<TrainStation> getAll() throws SQLException {
+    public List<TrainStation> getAll() {
         Connection connection = connectionPool.getConnection();
         List<TrainStation> trainStations = new ArrayList<>();
 
@@ -76,8 +79,8 @@ public class TrainStationDAO implements ITrainStationDAO {
             ps.setString(1, trainStation.getName());
             ps.setString(2, trainStation.getLocation());
             ps.executeUpdate();
-
             ResultSet rs = ps.getGeneratedKeys();
+
             while (rs.next()) {
                 trainStation.setId(rs.getInt(1));
             }
@@ -90,7 +93,7 @@ public class TrainStationDAO implements ITrainStationDAO {
     }
 
     @Override
-    public void update(TrainStation trainStation) throws SQLException, IOException {
+    public void update(TrainStation trainStation) {
         Connection connection = connectionPool.getConnection();
         String sql = "UPDATE train_stations SET name = ?, location = ? WHERE id = ?";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
@@ -126,11 +129,11 @@ public class TrainStationDAO implements ITrainStationDAO {
     private static List<TrainStation> mapTrainStations(ResultSet rs) throws SQLException {
         List<TrainStation> trainStations = new ArrayList<>();
         while (rs.next()) {
-            Integer id = rs.getInt("id");
+            Integer id = rs.getInt("train_station_id");
 
             TrainStation trainStation = findById(id, trainStations);
-            trainStation.setName(rs.getString("name"));
-            trainStation.setLocation(rs.getString("location"));
+            trainStation.setName(rs.getString("train_station_name"));
+            trainStation.setLocation(rs.getString("train_station_location"));
 
             List<Employee> employees = EmployeeDAO.mapRow(rs, trainStation.getEmployees());
             trainStation.setEmployees(employees);
@@ -154,22 +157,21 @@ public class TrainStationDAO implements ITrainStationDAO {
                 });
         }
 
-    public List<Employee> getEmployeesByTrainStationId(int id) throws SQLException, IOException {
+    public List<Employee> getEmployeesByTrainStationId(int id) {
         Connection connection = connectionPool.getConnection();
         Employee employee;
         List<Employee> employees = new ArrayList<>();
-        String sql = "SELECT e.id, first_name, last_name, position FROM train_stations ts LEFT JOIN employees e ON ts.id = e.station_id WHERE ts.id = ?";
+        String sql = "SELECT first_name, last_name, position FROM train_stations ts LEFT JOIN employees e ON ts.id = e.station_id WHERE ts.id = ?";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                int employeeId = rs.getInt("id");
                 String firstName = rs.getString("first_name");
                 String lastName = rs.getString("last_name");
                 String position = rs.getString("position");
 
-                employee = new Employee(employeeId, firstName, lastName, position);
+                employee = new Employee(firstName, lastName, position);
                 employees.add(employee);
             }
         } catch (SQLException e) {
@@ -180,7 +182,7 @@ public class TrainStationDAO implements ITrainStationDAO {
         return employees;
     }
 
-    public List<Platform> getPlatformsByTrainStationId(int id) throws SQLException, IOException {
+    public List<Platform> getPlatformsByTrainStationId(int id) {
         Connection connection = connectionPool.getConnection();
         Platform platform;
         List<Platform> platforms = new ArrayList<>();
@@ -204,7 +206,7 @@ public class TrainStationDAO implements ITrainStationDAO {
         return platforms;
     }
 
-    public List<TrainSchedule> getTrainSchedulesByTrainStationId(int id) throws SQLException, IOException {
+    public List<TrainSchedule> getTrainSchedulesByTrainStationId(int id) {
         Connection connection = connectionPool.getConnection();
         TrainSchedule trainSchedule;
         List<TrainSchedule> trainSchedules = new ArrayList<>();
@@ -217,7 +219,7 @@ public class TrainStationDAO implements ITrainStationDAO {
                 int trainScheduleId = rs.getInt("id");
                 Date date = rs.getDate("date");
 
-                trainSchedule = new TrainSchedule(trainScheduleId, date);
+                trainSchedule = new TrainSchedule(date);
                 trainSchedules.add(trainSchedule);
             }
         } catch (SQLException e) {
@@ -227,5 +229,12 @@ public class TrainStationDAO implements ITrainStationDAO {
         }
         return trainSchedules;
     }
+
+
+
+
+
+
+
 
 }

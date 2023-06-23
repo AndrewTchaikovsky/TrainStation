@@ -13,12 +13,10 @@ public class Train {
     public Train() {
     }
 
-    public Train(Integer id, String name, String type) {
-        this.id = id;
+    public Train(String name, String type) {
         this.name = name;
         this.type = type;
     }
-
 
     public Integer getId() {
         return id;

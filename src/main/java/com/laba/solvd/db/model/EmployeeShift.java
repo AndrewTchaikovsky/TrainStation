@@ -1,6 +1,6 @@
 package com.laba.solvd.db.model;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class EmployeeShift {
     private Integer id;
@@ -10,8 +10,7 @@ public class EmployeeShift {
     public EmployeeShift() {
     }
 
-    public EmployeeShift(Integer id, Date startDate, Date endDate) {
-        this.id = id;
+    public EmployeeShift(Date startDate, Date endDate) {
         this.startDate = startDate;
         this.endDate = endDate;
     }

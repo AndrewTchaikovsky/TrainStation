@@ -6,11 +6,13 @@ import java.util.List;
 
 public interface IDAO<T> {
 
-    T get(int id) throws SQLException, IOException;
+    T get(int id);
 
-    List<T> getAll() throws SQLException;
+    List<T> getAll();
 
-    void update(T t) throws SQLException, IOException;
+    void create(T t);
 
-    void delete(Integer id) throws SQLException, IOException;
+    void update(T t);
+
+    void delete(Integer id);
 }

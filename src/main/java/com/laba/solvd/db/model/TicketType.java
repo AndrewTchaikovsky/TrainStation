@@ -7,8 +7,7 @@ public class TicketType {
     public TicketType() {
     }
 
-    public TicketType(Integer id, String type) {
-        this.id = id;
+    public TicketType(String type) {
         this.type = type;
     }
 

@@ -19,13 +19,6 @@ public class Employee {
         this.position = position;
     }
 
-    public Employee(int id, String firstName, String lastName, String position) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.position = position;
-    }
-
     public Integer getId() {
         return id;
     }

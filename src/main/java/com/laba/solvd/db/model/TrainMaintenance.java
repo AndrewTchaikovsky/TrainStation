@@ -1,7 +1,6 @@
 package com.laba.solvd.db.model;
 
-import java.util.Date;
-import java.util.List;
+import java.sql.Date;
 
 public class TrainMaintenance {
     private Integer id;
@@ -11,8 +10,7 @@ public class TrainMaintenance {
     public TrainMaintenance() {
     }
 
-    public TrainMaintenance(Integer id, Date date, String type) {
-        this.id = id;
+    public TrainMaintenance(Date date, String type) {
         this.date = date;
         this.type = type;
     }

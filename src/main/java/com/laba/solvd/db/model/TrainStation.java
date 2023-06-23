@@ -18,13 +18,6 @@ public class TrainStation {
         this.location = location;
     }
 
-    public TrainStation(Integer id, String name, String location) {
-        this.id = id;
-        this.name = name;
-        this.location = location;
-    }
-
-
 
     public Integer getId() {
         return id;
@@ -112,5 +105,8 @@ public class TrainStation {
                 ", platforms=" + platforms +
                 ", trainSchedules=" + trainSchedules +
                 '}';
+    }
+
+    public void setEmployee(TrainStation trainStation, Employee platform) {
     }
 }
