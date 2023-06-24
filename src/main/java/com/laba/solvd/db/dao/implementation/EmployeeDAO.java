@@ -5,9 +5,7 @@ import com.laba.solvd.db.dao.interfaces.IEmployeeDAO;
 import com.laba.solvd.db.model.Employee;
 import com.laba.solvd.db.model.EmployeeShift;
 import com.laba.solvd.db.model.TrainMaintenance;
-import com.laba.solvd.db.model.TrainStation;
 import org.apache.log4j.Logger;
-
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -18,7 +16,7 @@ public class EmployeeDAO implements IEmployeeDAO {
     public static Logger logger = Logger.getLogger(EmployeeDAO.class);
     ConnectionPool connectionPool = ConnectionPool.getInstance();
 
-    public EmployeeDAO() throws SQLException {
+    public EmployeeDAO() {
     }
 
     @Override
@@ -73,13 +71,14 @@ public class EmployeeDAO implements IEmployeeDAO {
     }
 
     @Override
-    public void create(Employee employee) {
+    public void create(Employee employee, Integer id) {
         Connection connection = connectionPool.getConnection();
-        String sql = "INSERT INTO employees (first_name, last_name, position) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO employees (first_name, last_name, position, station_id) VALUES (?, ?, ?, ?)";
         try (PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             ps.setString(1, employee.getFirstName());
             ps.setString(2, employee.getLastName());
             ps.setString(3, employee.getPosition());
+            ps.setInt(4, id);
             ps.executeUpdate();
 
             ResultSet rs = ps.getGeneratedKeys();
@@ -136,7 +135,6 @@ public class EmployeeDAO implements IEmployeeDAO {
             }
 
             Employee employee = findById(id, employees);
-            employee.setId(rs.getInt("employee_id"));
             employee.setFirstName(rs.getString("employee_first_name"));
             employee.setLastName(rs.getString("employee_last_name"));
             employee.setPosition(rs.getString("employee_position"));
@@ -157,7 +155,6 @@ public class EmployeeDAO implements IEmployeeDAO {
                 });
     }
 
-
     @Override
     public List<EmployeeShift> getEmployeeShiftsByEmployeeId(int id) {
         Connection connection = connectionPool.getConnection();
@@ -169,7 +166,6 @@ public class EmployeeDAO implements IEmployeeDAO {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                int shiftId = rs.getInt("id");
                 Date startDate = rs.getDate("start_date");
                 Date endDate = rs.getDate("end_date");
 
@@ -186,7 +182,7 @@ public class EmployeeDAO implements IEmployeeDAO {
     }
 
     @Override
-    public List<TrainMaintenance> getTrainMaintenancesByEmployeeId(int id)  {
+    public List<TrainMaintenance> getTrainMaintenancesByEmployeeId(int id) {
         Connection connection = connectionPool.getConnection();
         TrainMaintenance trainMaintenance;
         List<TrainMaintenance> trainMaintenances = new ArrayList<>();
@@ -208,22 +204,6 @@ public class EmployeeDAO implements IEmployeeDAO {
             connectionPool.releaseConnection(connection);
         }
         return trainMaintenances;
-    }
-
-    @Override
-    public void setEmployees(TrainStation trainStation, Employee employee) {
-        Connection connection = connectionPool.getConnection();
-        String sql = "INSERT INTO employees (id, station_id) VALUES (?, ?)";
-        try (PreparedStatement ps = connection.prepareStatement(sql)) {
-            ps.setInt(1, employee.getId());
-            ps.setInt(2, trainStation.getId());
-            ps.executeUpdate();
-
-        } catch (SQLException e) {
-            logger.warn("Unable to set employees.", e);
-        } finally {
-            connectionPool.releaseConnection(connection);
-        }
     }
 
 }

@@ -4,24 +4,20 @@ import com.laba.solvd.db.model.Employee;
 import com.laba.solvd.db.model.Platform;
 import com.laba.solvd.db.model.PlatformStatus;
 import com.laba.solvd.db.model.TrainStation;
-import com.laba.solvd.db.services.implementation.EmployeeService;
-import com.laba.solvd.db.services.implementation.PlatformService;
-import com.laba.solvd.db.services.implementation.PlatformStatusService;
 import com.laba.solvd.db.services.implementation.TrainStationService;
+import com.laba.solvd.db.services.interfaces.ITrainStationService;
 import org.apache.log4j.Logger;
 
-import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
     public static Logger logger = Logger.getLogger(Main.class);
 
-    public static void main(String[] args) throws SQLException, IOException {
+    public static void main(String[] args) {
 
         TrainStation trainStation = new TrainStation("Grand Central Terminal", "New York, NY");
-        TrainStationService trainStationService = new TrainStationService();
+        ITrainStationService trainStationService = new TrainStationService();
 
         Employee employee = new Employee("John", "Doe", "Conductor");
         List<Employee> employees = new ArrayList<>();
@@ -36,6 +32,6 @@ public class Main {
         trainStation.setPlatforms(platforms);
 
         logger.info(trainStationService.create(trainStation));
-
+        logger.info(trainStationService.getAllTrainStations());
 }
 }

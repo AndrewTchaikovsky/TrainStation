@@ -4,7 +4,6 @@ import com.laba.solvd.db.dao.connection.ConnectionPool;
 import com.laba.solvd.db.dao.interfaces.IPlatformDAO;
 import com.laba.solvd.db.model.Platform;
 import com.laba.solvd.db.model.PlatformStatus;
-import com.laba.solvd.db.model.TrainStation;
 import org.apache.log4j.Logger;
 
 import java.sql.*;
@@ -15,7 +14,7 @@ public class PlatformDAO implements IPlatformDAO {
     public static Logger logger = Logger.getLogger(PlatformDAO.class);
     ConnectionPool connectionPool = ConnectionPool.getInstance();
 
-    public PlatformDAO() throws SQLException {
+    public PlatformDAO() {
     }
 
     @Override
@@ -29,7 +28,6 @@ public class PlatformDAO implements IPlatformDAO {
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
-                int platformId = rs.getInt("id");
                 int number = rs.getInt("number");
 
                 platform = new Platform(number);
@@ -54,7 +52,6 @@ public class PlatformDAO implements IPlatformDAO {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                int id = rs.getInt("id");
                 int number = rs.getInt("number");
 
                 platform = new Platform(number);
@@ -70,11 +67,12 @@ public class PlatformDAO implements IPlatformDAO {
     }
 
     @Override
-    public void create(Platform platform) {
+    public void create(Platform platform, Integer id) {
         Connection connection = connectionPool.getConnection();
-        String sql = "INSERT INTO platforms (number) VALUES (?)";
+        String sql = "INSERT INTO platforms (number, station_id) VALUES (?, ?)";
         try (PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             ps.setInt(1, platform.getNumber());
+            ps.setInt(2, id);
             ps.executeUpdate();
 
             ResultSet rs = ps.getGeneratedKeys();
@@ -129,7 +127,6 @@ public class PlatformDAO implements IPlatformDAO {
             }
 
             Platform platform = findById(id, platforms);
-            platform.setId(rs.getInt("platform.id"));
             platform.setNumber(rs.getInt("platform_number"));
 
             platform.setPlatformStatus(PlatformStatusDAO.mapRow(rs));
@@ -160,7 +157,6 @@ public class PlatformDAO implements IPlatformDAO {
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
-                int statusId = rs.getInt("id");
                 String status = rs.getString("status");
 
                 platformStatus = new PlatformStatus(status);
@@ -173,23 +169,4 @@ public class PlatformDAO implements IPlatformDAO {
         return platformStatus;
     }
 
-
-
-
-
-    @Override
-    public void setPlatforms(TrainStation trainStation, Platform platform) {
-        Connection connection = connectionPool.getConnection();
-        String sql = "INSERT INTO platforms (id, station_id) VALUES (?, ?)";
-        try (PreparedStatement ps = connection.prepareStatement(sql)) {
-            ps.setInt(1, platform.getId());
-            ps.setInt(2, trainStation.getId());
-            ps.executeUpdate();
-
-        } catch (SQLException e) {
-            logger.warn("Unable to set platforms.", e);
-        } finally {
-            connectionPool.releaseConnection(connection);
-        }
-    }
 }

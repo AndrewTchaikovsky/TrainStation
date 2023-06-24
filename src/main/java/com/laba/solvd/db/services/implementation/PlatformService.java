@@ -1,9 +1,8 @@
 package com.laba.solvd.db.services.implementation;
 
 import com.laba.solvd.db.dao.implementation.PlatformDAO;
-import com.laba.solvd.db.dao.implementation.PlatformStatusDAO;
 import com.laba.solvd.db.dao.interfaces.IPlatformDAO;
-import com.laba.solvd.db.dao.interfaces.IPlatformStatusDAO;
+import com.laba.solvd.db.model.Employee;
 import com.laba.solvd.db.model.Platform;
 import com.laba.solvd.db.model.PlatformStatus;
 import com.laba.solvd.db.services.interfaces.IPlatformService;
@@ -13,44 +12,34 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class PlatformService implements IPlatformService {
-    private final IPlatformDAO platformDAO = new PlatformDAO();
-    private final IPlatformStatusService platformStatusService = new PlatformStatusService();
-    private final IPlatformStatusDAO platformStatusDAO = new PlatformStatusDAO();
+    private final IPlatformDAO platformDAO;
+    private final IPlatformStatusService platformStatusService;
 
-    public PlatformService() throws SQLException {
+    public PlatformService() {
+        this.platformDAO = new PlatformDAO();
+        this.platformStatusService = new PlatformStatusService();
     }
 
     @Override
-    public Platform getPlatform(int id) {
-        return platformDAO.get(id);
-    }
-
-    @Override
-    public List<Platform> getAllPlatforms() {
-        return platformDAO.getAll();
-    }
-
-    @Override
-    public Platform create(Platform platform) {
+    public Platform create(Platform platform, Integer id) {
         platform.setId(null);
-        platformDAO.create(platform);
+        platformDAO.create(platform, id);
 
         if (platform.getPlatformStatus() != null) {
-            PlatformStatus platformStatus = platformStatusService.create(platform.getPlatformStatus());
-            platformStatusDAO.setPlatformStatus(platformStatus, platform);
+            PlatformStatus platformStatus = platformStatusService.create(platform.getPlatformStatus(), platform.getId());
+            platform.setPlatformStatus(platformStatus);
         }
         return platform;
     }
 
     @Override
-    public void updatePlatform(Platform platform) {
+    public void updateEmployee(Platform platform) {
         platformDAO.update(platform);
     }
 
     @Override
-    public void deletePlatform(Platform platform) {
-        platformDAO.delete(platform.getId());
-    }
+    public void deleteEmployee(Platform platform) {
 
+    }
 
 }

@@ -1,19 +1,15 @@
 package com.laba.solvd.db.services.interfaces;
 
+import com.laba.solvd.db.model.Employee;
 import com.laba.solvd.db.model.Platform;
 
-import java.io.IOException;
-import java.sql.SQLException;
-import java.util.List;
-
 public interface IPlatformService {
-    Platform getPlatform(int id) throws SQLException, IOException;
 
-    List<Platform> getAllPlatforms() throws SQLException;
+    Platform create(Platform platform, Integer id);
 
-    Platform create(Platform platform);
+    void updateEmployee(Platform platform) ;
 
-    void updatePlatform(Platform platform) throws SQLException, IOException;
+    void deleteEmployee(Platform platform) ;
 
-    void deletePlatform(Platform platform) throws SQLException, IOException;
+
 }

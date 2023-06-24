@@ -6,43 +6,23 @@ import com.laba.solvd.db.model.Platform;
 import com.laba.solvd.db.model.PlatformStatus;
 import com.laba.solvd.db.services.interfaces.IPlatformStatusService;
 
-import java.io.IOException;
-import java.sql.SQLException;
-import java.util.List;
-
 public class PlatformStatusService implements IPlatformStatusService {
 
-    private IPlatformStatusDAO platformStatusDAO = new PlatformStatusDAO();
+    private final IPlatformStatusDAO platformStatusDAO;
 
-    @Override
-    public PlatformStatus getPlatformStatus(int id) throws SQLException, IOException {
-        return null;
+    public PlatformStatusService() {
+        platformStatusDAO = new PlatformStatusDAO();
     }
 
     @Override
-    public List<PlatformStatus> getAllPlatformStatuses() throws SQLException {
-        return null;
-    }
-
-    @Override
-    public PlatformStatus create(PlatformStatus platformStatus) {
+    public PlatformStatus create(PlatformStatus platformStatus, Integer id) {
         platformStatus.setId(null);
-        platformStatusDAO.create(platformStatus);
+        platformStatusDAO.create(platformStatus, id);
         return platformStatus;
     }
 
     @Override
-    public void updatePlatformStatus(PlatformStatus platformStatus) throws SQLException, IOException {
-
-    }
-
-    @Override
-    public void deletePlatformStatus(PlatformStatus platformStatus) throws SQLException, IOException {
-
-    }
-
-    @Override
     public void setPlatformStatus(PlatformStatus platformStatus, Platform platform) {
-
+        platformStatusDAO.setPlatformStatus(platformStatus, platform);
     }
 }

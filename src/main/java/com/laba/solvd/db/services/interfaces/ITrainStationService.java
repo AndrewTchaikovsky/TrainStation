@@ -7,13 +7,13 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface ITrainStationService {
-    TrainStation getTrainStation(int id) throws SQLException, IOException;
+    TrainStation getTrainStation(int id);
 
-    List<TrainStation> getAllTrainStations() throws SQLException;
+    List<TrainStation> getAllTrainStations();
 
-    TrainStation create(TrainStation trainStation) throws SQLException, IOException;
+    TrainStation create(TrainStation trainStation);
 
-    void updateTrainStation(TrainStation trainStation) throws SQLException, IOException;
+    void updateTrainStation(TrainStation trainStation);
 
-    void deleteTrainStation(TrainStation trainStation) throws SQLException, IOException;
+    void deleteTrainStation(TrainStation trainStation);
 }

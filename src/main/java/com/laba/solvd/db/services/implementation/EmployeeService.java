@@ -9,29 +9,18 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class EmployeeService implements IEmployeeService {
-    private IEmployeeDAO employeeDAO;
+    private final IEmployeeDAO employeeDAO;
 
-    public EmployeeService() throws SQLException {
+    public EmployeeService() {
         this.employeeDAO = new EmployeeDAO();
     }
 
     @Override
-    public Employee getEmployee(int id) {
-        return employeeDAO.get(id);
-    }
-
-    @Override
-    public List<Employee> getAllEmployees() {
-        return employeeDAO.getAll();
-    }
-
-    @Override
-    public Employee create(Employee employee) {
+    public Employee create(Employee employee, Integer id) {
         employee.setId(null);
-        employeeDAO.create(employee);
+        employeeDAO.create(employee, id);
         return employee;
     }
-
 
     @Override
     public void updateEmployee(Employee employee) {
@@ -42,4 +31,5 @@ public class EmployeeService implements IEmployeeService {
     public void deleteEmployee(Employee employee) {
         employeeDAO.delete(employee.getId());
     }
+
 }

@@ -15,19 +15,25 @@ import java.util.List;
 public class TrainStationDAO implements ITrainStationDAO {
     public static Logger logger = Logger.getLogger(TrainStationDAO.class);
     public static final ConnectionPool connectionPool = ConnectionPool.getInstance();
-    private static final String FIND_ALL_QUERIES = "SELECT \n" +
-            "ts.id AS train_station_id, \n" +
-            "ts.name AS train_station_name, \n" +
-            "ts.location AS train_station_location, \n" +
+    private static final String FIND_ALL_QUERIES = "SELECT\n" +
+            "ts.id AS train_station_id,\n" +
+            "ts.name AS train_station_name,\n" +
+            "ts.location AS train_station_location,\n" +
+            "pl.id AS platform_id,\n" +
             "pl.number AS platform_number, \n" +
+            "ps.id AS platform_status_id,\n" +
             "ps.status AS platform_status,\n" +
+            "e.id AS employee_id, \n" +
             "e.first_name AS employee_first_name, \n" +
             "e.last_name AS employee_last_name, \n" +
-            "e.position\n" +
+            "e.position AS employee_position\n" +
             "FROM train_stations ts\n" +
             "LEFT JOIN platforms pl ON ts.id = pl.station_id\n" +
             "LEFT JOIN employees e ON ts.id = e.station_id\n" +
             "LEFT JOIN platform_statuses ps ON pl.id = ps.platform_id";
+
+    public TrainStationDAO() {
+    }
 
     @Override
     public TrainStation get(int id) {
@@ -141,7 +147,7 @@ public class TrainStationDAO implements ITrainStationDAO {
             List<Platform> platforms = PlatformDAO.mapRow(rs, trainStation.getPlatforms());
             trainStation.setPlatforms(platforms);
         }
-        return  trainStations;
+        return trainStations;
     }
 
 
@@ -155,7 +161,7 @@ public class TrainStationDAO implements ITrainStationDAO {
                     trainStations.add(createdTrainStation);
                     return createdTrainStation;
                 });
-        }
+    }
 
     public List<Employee> getEmployeesByTrainStationId(int id) {
         Connection connection = connectionPool.getConnection();
@@ -175,7 +181,7 @@ public class TrainStationDAO implements ITrainStationDAO {
                 employees.add(employee);
             }
         } catch (SQLException e) {
-            logger.warn("Unable to find employees by train station id: " + id , e);
+            logger.warn("Unable to find employees by train station id: " + id, e);
         } finally {
             connectionPool.releaseConnection(connection);
         }
@@ -199,7 +205,7 @@ public class TrainStationDAO implements ITrainStationDAO {
                 platforms.add(platform);
             }
         } catch (SQLException e) {
-            logger.warn("Unable to find platforms by train station id: " + id , e);
+            logger.warn("Unable to find platforms by train station id: " + id, e);
         } finally {
             connectionPool.releaseConnection(connection);
         }
@@ -223,18 +229,11 @@ public class TrainStationDAO implements ITrainStationDAO {
                 trainSchedules.add(trainSchedule);
             }
         } catch (SQLException e) {
-            logger.warn("Unable to find train schedules by train station id: " + id , e);
+            logger.warn("Unable to find train schedules by train station id: " + id, e);
         } finally {
             connectionPool.releaseConnection(connection);
         }
         return trainSchedules;
     }
-
-
-
-
-
-
-
 
 }

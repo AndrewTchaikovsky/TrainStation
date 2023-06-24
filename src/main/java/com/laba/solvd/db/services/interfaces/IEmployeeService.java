@@ -1,21 +1,18 @@
 package com.laba.solvd.db.services.interfaces;
 
 import com.laba.solvd.db.model.Employee;
+import com.laba.solvd.db.model.TrainStation;
 
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
 public interface IEmployeeService {
-    Employee getEmployee(int id) throws SQLException, IOException;
 
+    Employee create(Employee employee, Integer id);
 
-    List<Employee> getAllEmployees() throws SQLException;
+    void updateEmployee(Employee employee) ;
 
+    void deleteEmployee(Employee employee) ;
 
-    Employee create(Employee employee);
-
-    void updateEmployee(Employee employee) throws SQLException, IOException;
-
-    void deleteEmployee(Employee employee) throws SQLException, IOException;
 }

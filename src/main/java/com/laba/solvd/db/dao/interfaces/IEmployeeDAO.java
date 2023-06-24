@@ -9,10 +9,19 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-public interface IEmployeeDAO extends IDAO<Employee> {
-    List<EmployeeShift> getEmployeeShiftsByEmployeeId(int id) throws SQLException, IOException;
+public interface IEmployeeDAO {
+    Employee get(int id);
 
-    List<TrainMaintenance> getTrainMaintenancesByEmployeeId(int id) throws SQLException, IOException;
+    List<Employee> getAll();
 
-    void setEmployees(TrainStation trainStation, Employee employee);
+    void create(Employee employee, Integer id);
+
+    void update(Employee employee);
+
+    void delete(Integer id);
+
+    List<EmployeeShift> getEmployeeShiftsByEmployeeId(int id);
+
+    List<TrainMaintenance> getTrainMaintenancesByEmployeeId(int id);
+
 }

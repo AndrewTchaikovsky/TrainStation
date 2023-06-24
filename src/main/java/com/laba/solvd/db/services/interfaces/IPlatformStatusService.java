@@ -8,17 +8,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface IPlatformStatusService {
-
-    PlatformStatus getPlatformStatus(int id) throws SQLException, IOException;
-
-    List<PlatformStatus> getAllPlatformStatuses() throws SQLException;
-
-
-    PlatformStatus create(PlatformStatus platformStatus);
-
-    void updatePlatformStatus(PlatformStatus platformStatus) throws SQLException, IOException;
-
-    void deletePlatformStatus(PlatformStatus platformStatus) throws SQLException, IOException;
+    PlatformStatus create(PlatformStatus platformStatus, Integer id);
 
     void setPlatformStatus(PlatformStatus platformStatus, Platform platform);
 }

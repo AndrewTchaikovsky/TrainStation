@@ -7,28 +7,22 @@ import com.laba.solvd.db.model.PlatformStatus;
 import org.apache.log4j.Logger;
 
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
 
 public class PlatformStatusDAO implements IPlatformStatusDAO {
     public static Logger logger = Logger.getLogger(PlatformStatusDAO.class);
     ConnectionPool connectionPool = ConnectionPool.getInstance();
-    @Override
-    public PlatformStatus get(int id) {
-        return null;
+
+    public PlatformStatusDAO() {
     }
 
     @Override
-    public List<PlatformStatus> getAll() {
-        return null;
-    }
-
-    @Override
-    public void create(PlatformStatus platformStatus) {
+    public void create(PlatformStatus platformStatus, Integer id) {
         Connection connection = connectionPool.getConnection();
-        String sql = "INSERT INTO platform_statuses (status) VALUES (?)";
+        String sql = "INSERT INTO platform_statuses (status, platform_id) VALUES (?,?)";
         try (PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             ps.setString(1, platformStatus.getStatus());
+            ps.setInt(2, id);
             ps.executeUpdate();
 
             ResultSet rs = ps.getGeneratedKeys();
@@ -41,16 +35,6 @@ public class PlatformStatusDAO implements IPlatformStatusDAO {
         } finally {
             connectionPool.releaseConnection(connection);
         }
-    }
-
-    @Override
-    public void update(PlatformStatus platformStatus) {
-
-    }
-
-    @Override
-    public void delete(Integer id) {
-
     }
 
     @Override
@@ -80,7 +64,6 @@ public class PlatformStatusDAO implements IPlatformStatusDAO {
 
         if (id != 0) {
             platformStatus = new PlatformStatus();
-            platformStatus.setId(rs.getInt("platform_status_id"));
             platformStatus.setStatus(rs.getString("platform_status"));
 
         }
