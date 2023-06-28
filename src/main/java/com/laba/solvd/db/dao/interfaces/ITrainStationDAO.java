@@ -10,17 +10,11 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface ITrainStationDAO {
-    TrainStation get(int id);
+    TrainStation getById(int id);
 
     List<TrainStation> getAll();
 
     void create(TrainStation trainStation);
 
-    void update(TrainStation trainStation);
-
-    void delete(Integer id);
-
-    List<Employee> getEmployeesByTrainStationId(int id) throws SQLException, IOException;
-    List<Platform> getPlatformsByTrainStationId(int id) throws SQLException, IOException;
-    List<TrainSchedule> getTrainSchedulesByTrainStationId(int id) throws SQLException, IOException;
+    void deleteById(Integer id);
 }

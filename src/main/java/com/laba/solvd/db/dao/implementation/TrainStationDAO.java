@@ -36,7 +36,7 @@ public class TrainStationDAO implements ITrainStationDAO {
     }
 
     @Override
-    public TrainStation get(int id) {
+    public TrainStation getById(int id) {
         Connection connection = connectionPool.getConnection();
         TrainStation trainStation = null;
         String sql = "SELECT name, location FROM train_stations WHERE id = ?";
@@ -98,7 +98,6 @@ public class TrainStationDAO implements ITrainStationDAO {
         }
     }
 
-    @Override
     public void update(TrainStation trainStation) {
         Connection connection = connectionPool.getConnection();
         String sql = "UPDATE train_stations SET name = ?, location = ? WHERE id = ?";
@@ -117,7 +116,7 @@ public class TrainStationDAO implements ITrainStationDAO {
 
 
     @Override
-    public void delete(Integer id) {
+    public void deleteById(Integer id) {
         Connection connection = connectionPool.getConnection();
         String sql = "DELETE FROM train_stations WHERE id = ?";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {

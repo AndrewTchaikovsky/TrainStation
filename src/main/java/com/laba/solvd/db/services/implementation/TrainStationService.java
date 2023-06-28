@@ -23,7 +23,7 @@ public class TrainStationService implements ITrainStationService {
 
     @Override
     public TrainStation getTrainStation(int id) {
-        return trainStationDAO.get(id);
+        return trainStationDAO.getById(id);
     }
 
     @Override
@@ -54,13 +54,8 @@ public class TrainStationService implements ITrainStationService {
     }
 
     @Override
-    public void updateTrainStation(TrainStation trainStation) {
-        trainStationDAO.update(trainStation);
-    }
-
-    @Override
     public void deleteTrainStation(TrainStation trainStation) {
-        trainStationDAO.delete(trainStation.getId());
+        trainStationDAO.deleteById(trainStation.getId());
     }
 
 }

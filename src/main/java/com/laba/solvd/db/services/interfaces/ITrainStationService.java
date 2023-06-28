@@ -13,7 +13,5 @@ public interface ITrainStationService {
 
     TrainStation create(TrainStation trainStation);
 
-    void updateTrainStation(TrainStation trainStation);
-
     void deleteTrainStation(TrainStation trainStation);
 }

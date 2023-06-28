@@ -7,13 +7,36 @@ import com.laba.solvd.db.model.PlatformStatus;
 import org.apache.log4j.Logger;
 
 import java.sql.*;
-import java.util.List;
 
 public class PlatformStatusDAO implements IPlatformStatusDAO {
     public static Logger logger = Logger.getLogger(PlatformStatusDAO.class);
     ConnectionPool connectionPool = ConnectionPool.getInstance();
 
     public PlatformStatusDAO() {
+    }
+
+    @Override
+    public PlatformStatus get(int id) {
+        Connection connection = connectionPool.getConnection();
+        PlatformStatus platformStatus = null;
+        String sql = "SELECT id, status FROM platform_statuses WHERE id = ?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, id);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                String status = rs.getString("status");
+
+                platformStatus = new PlatformStatus(status);
+            }
+
+        } catch (SQLException e) {
+            logger.warn("Unable to find platform status.", e);
+        } finally {
+            connectionPool.releaseConnection(connection);
+        }
+        return platformStatus;
     }
 
     @Override

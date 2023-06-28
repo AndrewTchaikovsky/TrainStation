@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.laba.solvd.db.dao.interfaces.IPlatformDAO">
+
+    <select id="get" resultMap="com.laba.solvd.db.dao.interfaces.IPlatformDAO.platformResultMap">
+        SELECT p.id, p.number, ps.id, ps.status FROM platforms p LEFT JOIN platform_statuses ps ON p.id = ps.platform_id WHERE p.id = #{id}
+    </select>
+
+    <resultMap id="platformResultMap" type="com.laba.solvd.db.model.Platform" autoMapping="false">
+        <id property="id" column="id"/>
+        <result property="number" column="number"/>
+        <association property="platformStatus" resultMap="com.laba.solvd.db.dao.interfaces.IPlatformStatusDAO.platformStatusResultMap"/>
+    </resultMap>
+
+    <insert id="create">
+        INSERT INTO platforms (number, station_id) VALUES (#{number}, #{station_id})
+    </insert>
+
+    <delete id="delete">
+        DELETE FROM platforms WHERE id = #{id}
+    </delete>
+
+</mapper>
