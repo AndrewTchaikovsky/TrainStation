@@ -7,7 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import java.util.List;
 
 public class TrainStationMapper implements ITrainStationDAO {
-    private SqlSession session;
+    private final SqlSession session;
 
     public TrainStationMapper(SqlSession session) {
         this.session = session;
@@ -20,7 +20,7 @@ public class TrainStationMapper implements ITrainStationDAO {
 
     @Override
     public List<TrainStation> getAll() {
-        return null;
+        return session.selectList("getAll");
     }
 
     @Override

@@ -18,7 +18,7 @@ public class PlatformDAO implements IPlatformDAO {
     }
 
     @Override
-    public Platform get(int id) {
+    public Platform getById(int id) {
         Connection connection = connectionPool.getConnection();
         Platform platform = null;
         String sql = "SELECT id, number FROM platforms WHERE id = ?";
@@ -87,7 +87,7 @@ public class PlatformDAO implements IPlatformDAO {
         }
     }
 
-    @Override
+
     public void update(Platform platform) {
         Connection connection = connectionPool.getConnection();
         String sql = "UPDATE platforms SET number = ? WHERE id = ?";
@@ -104,7 +104,7 @@ public class PlatformDAO implements IPlatformDAO {
     }
 
     @Override
-    public void delete(Integer id) {
+    public void deleteById(Integer id) {
         Connection connection = connectionPool.getConnection();
         String sql = "DELETE FROM platforms WHERE id = ?";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
@@ -147,7 +147,7 @@ public class PlatformDAO implements IPlatformDAO {
                 });
     }
 
-    @Override
+
     public PlatformStatus getPlatformStatusByPlatformId(int id) {
         Connection connection = connectionPool.getConnection();
         PlatformStatus platformStatus = null;

@@ -32,10 +32,6 @@ public class PlatformService implements IPlatformService {
         return platform;
     }
 
-    @Override
-    public void updateEmployee(Platform platform) {
-        platformDAO.update(platform);
-    }
 
     @Override
     public void deleteEmployee(Platform platform) {

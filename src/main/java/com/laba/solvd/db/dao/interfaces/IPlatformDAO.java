@@ -7,16 +7,12 @@ import java.util.List;
 
 public interface IPlatformDAO {
 
-    Platform get(int id);
+    Platform getById(int id);
 
     List<Platform> getAll();
 
     void create(Platform platform, Integer id);
 
-    void update(Platform platform);
-
-    void delete(Integer id);
-
-    PlatformStatus getPlatformStatusByPlatformId(int id);
+    void deleteById(Integer id);
 
 }

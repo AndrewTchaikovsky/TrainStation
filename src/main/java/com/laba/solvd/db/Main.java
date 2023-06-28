@@ -54,15 +54,15 @@ public class Main {
             logger.info(trainStation);
 
             IEmployeeDAO employeeMapper = session.getMapper(IEmployeeDAO.class);
-            Employee employee = employeeMapper.get(32);
+            Employee employee = employeeMapper.getById(32);
             logger.info(employee);
 
             IPlatformDAO platformMapper = session.getMapper(IPlatformDAO.class);
-            Platform platform = platformMapper.get(30);
+            Platform platform = platformMapper.getById(30);
             logger.info(platform);
 
             IPlatformStatusDAO platformStatusMapper = session.getMapper(IPlatformStatusDAO.class);
-            PlatformStatus platformStatus = platformStatusMapper.get(7);
+            PlatformStatus platformStatus = platformStatusMapper.getById(7);
             logger.info(platformStatus);
 
             TrainStation trainStation2 = new TrainStation("Penn Station", "New York, NY");
@@ -70,9 +70,8 @@ public class Main {
             logger.info(trainStation2);
 
             TrainStationMapper trainStationMapper1 = new TrainStationMapper(session);
-            TrainStation trainStation3 = trainStationMapper1.getById(30);
-            logger.info(trainStation3);
-            trainStationMapper1.deleteById(38);
+            List<TrainStation> trainStations = trainStationMapper1.getAll();
+            logger.info(trainStations);
 
 
         }

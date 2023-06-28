@@ -22,14 +22,10 @@ public class EmployeeService implements IEmployeeService {
         return employee;
     }
 
-    @Override
-    public void updateEmployee(Employee employee) {
-        employeeDAO.update(employee);
-    }
 
     @Override
     public void deleteEmployee(Employee employee) {
-        employeeDAO.delete(employee.getId());
+        employeeDAO.deleteById(employee.getId());
     }
 
 }

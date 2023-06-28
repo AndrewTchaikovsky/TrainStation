@@ -4,7 +4,7 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.laba.solvd.db.dao.interfaces.IEmployeeDAO">
 
-    <select id="get" resultMap="com.laba.solvd.db.dao.interfaces.IEmployeeDAO.employeeResultMap">
+    <select id="getById" resultMap="com.laba.solvd.db.dao.interfaces.IEmployeeDAO.employeeResultMap">
         SELECT * FROM employees WHERE id = #{id}
     </select>
 
@@ -19,7 +19,7 @@
         INSERT INTO employees (first_name, last_name, position, station_id) VALUES (#{first_name}, #{last_name},#{position}, #{station_id})
     </insert>
 
-    <delete id="delete">
+    <delete id="deleteById">
         DELETE FROM employee WHERE id = #{id}
     </delete>
 

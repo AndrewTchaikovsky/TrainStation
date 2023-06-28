@@ -4,7 +4,7 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.laba.solvd.db.dao.interfaces.IPlatformDAO">
 
-    <select id="get" resultMap="com.laba.solvd.db.dao.interfaces.IPlatformDAO.platformResultMap">
+    <select id="getById" resultMap="com.laba.solvd.db.dao.interfaces.IPlatformDAO.platformResultMap">
         SELECT p.id, p.number, ps.id, ps.status FROM platforms p LEFT JOIN platform_statuses ps ON p.id = ps.platform_id WHERE p.id = #{id}
     </select>
 
@@ -18,7 +18,7 @@
         INSERT INTO platforms (number, station_id) VALUES (#{number}, #{station_id})
     </insert>
 
-    <delete id="delete">
+    <delete id="deleteById">
         DELETE FROM platforms WHERE id = #{id}
     </delete>
 

@@ -4,7 +4,7 @@ import com.laba.solvd.db.model.Platform;
 import com.laba.solvd.db.model.PlatformStatus;
 
 public interface IPlatformStatusDAO {
-    PlatformStatus get(int id);
+    PlatformStatus getById(int id);
 
     void create(PlatformStatus platformStatus, Integer id);
 

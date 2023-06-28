@@ -20,7 +20,7 @@ public class EmployeeDAO implements IEmployeeDAO {
     }
 
     @Override
-    public Employee get(int id) {
+    public Employee getById(int id) {
         Connection connection = connectionPool.getConnection();
         Employee employee = null;
         String sql = "SELECT first_name, last_name, position FROM employees WHERE id = ?";
@@ -93,7 +93,7 @@ public class EmployeeDAO implements IEmployeeDAO {
         }
     }
 
-    @Override
+
     public void update(Employee employee) {
         Connection connection = connectionPool.getConnection();
         String sql = "UPDATE employees SET first_name = ?, last_name = ?, position = ? WHERE id = ?";
@@ -112,7 +112,7 @@ public class EmployeeDAO implements IEmployeeDAO {
     }
 
     @Override
-    public void delete(Integer id) {
+    public void deleteById(Integer id) {
         Connection connection = connectionPool.getConnection();
         String sql = "DELETE FROM employees WHERE id = ?";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
@@ -155,7 +155,7 @@ public class EmployeeDAO implements IEmployeeDAO {
                 });
     }
 
-    @Override
+
     public List<EmployeeShift> getEmployeeShiftsByEmployeeId(int id) {
         Connection connection = connectionPool.getConnection();
         EmployeeShift employeeShift;
@@ -181,7 +181,7 @@ public class EmployeeDAO implements IEmployeeDAO {
         return employeeShifts;
     }
 
-    @Override
+
     public List<TrainMaintenance> getTrainMaintenancesByEmployeeId(int id) {
         Connection connection = connectionPool.getConnection();
         TrainMaintenance trainMaintenance;

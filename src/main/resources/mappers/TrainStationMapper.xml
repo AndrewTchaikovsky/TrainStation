@@ -11,6 +11,13 @@
         WHERE ts.id = #{id}
     </select>
 
+    <select id="getAll" resultMap="com.laba.solvd.db.dao.interfaces.ITrainStationDAO.trainStationResultMap">
+        SELECT ts.id, ts.name, ts.location, e.id, e.first_name, e.last_name, e.position, p.id, p.number FROM train_stations ts
+        LEFT JOIN employees e ON ts.id = e.station_id
+        LEFT JOIN platforms p ON ts.id = p.station_id
+        WHERE ts.id = #{id}
+    </select>
+
 <resultMap id="trainStationResultMap" type="com.laba.solvd.db.model.TrainStation" autoMapping="false">
     <id property="id" column="id"/>
     <result property="name" column="name"/>

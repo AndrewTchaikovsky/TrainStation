@@ -10,18 +10,12 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface IEmployeeDAO {
-    Employee get(int id);
+    Employee getById(int id);
 
     List<Employee> getAll();
 
     void create(Employee employee, Integer id);
 
-    void update(Employee employee);
-
-    void delete(Integer id);
-
-    List<EmployeeShift> getEmployeeShiftsByEmployeeId(int id);
-
-    List<TrainMaintenance> getTrainMaintenancesByEmployeeId(int id);
+    void deleteById(Integer id);
 
 }

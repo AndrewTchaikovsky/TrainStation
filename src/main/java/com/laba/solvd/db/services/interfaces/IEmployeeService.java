@@ -11,7 +11,6 @@ public interface IEmployeeService {
 
     Employee create(Employee employee, Integer id);
 
-    void updateEmployee(Employee employee) ;
 
     void deleteEmployee(Employee employee) ;
 

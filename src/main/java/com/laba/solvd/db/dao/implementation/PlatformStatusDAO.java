@@ -16,7 +16,7 @@ public class PlatformStatusDAO implements IPlatformStatusDAO {
     }
 
     @Override
-    public PlatformStatus get(int id) {
+    public PlatformStatus getById(int id) {
         Connection connection = connectionPool.getConnection();
         PlatformStatus platformStatus = null;
         String sql = "SELECT id, status FROM platform_statuses WHERE id = ?";
