@@ -5,7 +5,7 @@
 <mapper namespace="com.laba.solvd.db.dao.interfaces.IPlatformDAO">
 
     <select id="getById" resultMap="com.laba.solvd.db.dao.interfaces.IPlatformDAO.platformResultMap">
-        SELECT p.id, p.number, ps.id, ps.status FROM platforms p LEFT JOIN platform_statuses ps ON p.id = ps.platform_id WHERE p.id = #{id}
+        SELECT p.id AS platform_id, p.number AS platform_number, ps.id AS platform_status_id, ps.status AS platform_status FROM platforms p LEFT JOIN platform_statuses ps ON p.id = ps.platform_id WHERE p.id = #{id}
     </select>
 
     <resultMap id="platformResultMap" type="com.laba.solvd.db.model.Platform" autoMapping="false">

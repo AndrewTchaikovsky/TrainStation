@@ -24,6 +24,8 @@ public class PlatformStatusMapper implements IPlatformStatusDAO {
 
     @Override
     public void setPlatformStatus(PlatformStatus platformStatus, Platform platform) {
-
+        IPlatformStatusDAO platformStatusDAO = session.getMapper(IPlatformStatusDAO.class);
+        platformStatusDAO.setPlatformStatus(platformStatus, platform);
+        session.commit();
     }
 }

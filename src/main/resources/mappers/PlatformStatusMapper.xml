@@ -5,7 +5,7 @@
 <mapper namespace="com.laba.solvd.db.dao.interfaces.IPlatformStatusDAO">
 
     <select id="getById" resultMap="com.laba.solvd.db.dao.interfaces.IPlatformStatusDAO.platformStatusResultMap">
-        SELECT * FROM platform_statuses WHERE id = #{id}
+        SELECT ps.id AS platform_status_id, ps.status AS platform_status FROM platform_statuses ps WHERE ps.id = #{id}
     </select>
 
     <resultMap id="platformStatusResultMap" type="com.laba.solvd.db.model.PlatformStatus" autoMapping="false">

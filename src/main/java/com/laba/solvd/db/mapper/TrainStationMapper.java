@@ -15,7 +15,7 @@ public class TrainStationMapper implements ITrainStationDAO {
 
     @Override
     public TrainStation getById(int id) {
-       return session.selectOne("getById", id);
+        return session.selectOne("getById", id);
     }
 
     @Override

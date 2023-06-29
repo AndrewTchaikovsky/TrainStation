@@ -5,7 +5,7 @@
 <mapper namespace="com.laba.solvd.db.dao.interfaces.IEmployeeDAO">
 
     <select id="getById" resultMap="com.laba.solvd.db.dao.interfaces.IEmployeeDAO.employeeResultMap">
-        SELECT * FROM employees WHERE id = #{id}
+        SELECT e.id AS employee_id, e.first_name AS employee_first_name, e.last_name AS employee_last_name, e.position AS employee_position FROM employees e WHERE e.id = #{id}
     </select>
 
     <resultMap id="employeeResultMap" type="com.laba.solvd.db.model.Employee" autoMapping="false">

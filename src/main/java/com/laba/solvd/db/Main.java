@@ -46,8 +46,8 @@ public class Main {
 //        logger.info(trainStationService.create(trainStation));
 //        logger.info(trainStationService.getAllTrainStations());
 
-        try (InputStream stream = Resources.getResourceAsStream("mybatis-config.xml");
-             SqlSession session = new SqlSessionFactoryBuilder().build(stream).openSession(true)) {
+            SqlSessionFactory sqlSessionFactory = MyBatisFactory.getSqlSessionFactory();
+        try (SqlSession session = sqlSessionFactory.openSession(true)) {
 
             ITrainStationDAO trainStationMapper = session.getMapper(ITrainStationDAO.class);
             TrainStation trainStation = trainStationMapper.getById(30);
@@ -72,8 +72,6 @@ public class Main {
             TrainStationMapper trainStationMapper1 = new TrainStationMapper(session);
             List<TrainStation> trainStations = trainStationMapper1.getAll();
             logger.info(trainStations);
-
-
         }
 
     }
